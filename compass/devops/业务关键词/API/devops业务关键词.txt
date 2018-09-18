@@ -1,0 +1,10 @@
+*** Settings ***
+Resource          ../../环境信息/API/globalEnv.txt
+Library    Collections 
+Library    OperatingSystem 
+
+
+
+*** Test Cases ***
+log
+    log     "abc"

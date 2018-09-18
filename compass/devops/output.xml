@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20180918 10:28:03.070">
+<suite id="s1" name="Devops" source="/Users/peter/mysource/mygithub/rf/compass/devops">
+<suite id="s1-s1" name="业务关键词" source="/Users/peter/mysource/mygithub/rf/compass/devops/业务关键词">
+<suite id="s1-s1-s1" name="API" source="/Users/peter/mysource/mygithub/rf/compass/devops/业务关键词/API">
+<suite id="s1-s1-s1-s1" name="Devops业务关键词" source="/Users/peter/mysource/mygithub/rf/compass/devops/业务关键词/API/devops业务关键词.txt">
+<test id="s1-s1-s1-s1-t1" name="log">
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>"abc"</arg>
+</arguments>
+<msg timestamp="20180918 10:28:03.156" level="INFO">"abc"</msg>
+<status status="PASS" starttime="20180918 10:28:03.155" endtime="20180918 10:28:03.156"></status>
+</kw>
+<status status="PASS" starttime="20180918 10:28:03.154" endtime="20180918 10:28:03.156" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20180918 10:28:03.130" endtime="20180918 10:28:03.157"></status>
+</suite>
+<status status="PASS" starttime="20180918 10:28:03.125" endtime="20180918 10:28:03.160"></status>
+</suite>
+<status status="PASS" starttime="20180918 10:28:03.122" endtime="20180918 10:28:03.162"></status>
+</suite>
+<status status="PASS" starttime="20180918 10:28:03.096" endtime="20180918 10:28:03.164"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Devops">Devops</stat>
+<stat pass="1" fail="0" id="s1-s1" name="业务关键词">Devops.业务关键词</stat>
+<stat pass="1" fail="0" id="s1-s1-s1" name="API">Devops.业务关键词.API</stat>
+<stat pass="1" fail="0" id="s1-s1-s1-s1" name="Devops业务关键词">Devops.业务关键词.API.Devops业务关键词</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20180918 10:28:03.133" level="WARN">Imported resource file '/Users/peter/mysource/mygithub/rf/compass/devops/环境信息/API/globalEnv.txt' is empty.</msg>
+</errors>
+</robot>
