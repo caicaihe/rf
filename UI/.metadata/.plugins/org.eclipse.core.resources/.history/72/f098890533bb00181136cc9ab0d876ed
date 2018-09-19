@@ -1,0 +1,17 @@
+*** Settings ***
+Resource          ../../环境信息/API/globalEnv.txt
+Library    Collections 
+Library    OperatingSystem 
+
+
+
+*** Keywords ***
+devops_获取workplace
+    [Arguments]
+    ${header}    Create Dictionary   Content-Type=application/json  Authorization=Bearer ${access_token}        
+    Create Session    cmb   http://${api_ip}:${api_port}/cmbchina-pay/     ${header}   
+    ${resp}=    Post Request    cmb    ${url}     data=${abc}   headers=${header}
+    Should Be Equal As Strings    ${resp.status_code}    200
+    ${content}=         Set Variable    ${resp.json()}
+    ${id}    Set Variable   ${content['data'][0]['id']}
+    [Return]  ${id}   

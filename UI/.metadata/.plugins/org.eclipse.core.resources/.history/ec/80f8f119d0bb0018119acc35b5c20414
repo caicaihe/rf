@@ -1,0 +1,5 @@
+*** Variables ***
+${api_ip}         10.128.23.18    # 本地地址
+${api_port}       8080    # 端口号
+${username}    heliping
+${password}    123456

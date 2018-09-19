@@ -1,27 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20180918 10:28:03.070">
+<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20180919 13:53:56.392">
 <suite id="s1" name="Devops" source="/Users/peter/mysource/mygithub/rf/compass/devops">
-<suite id="s1-s1" name="业务关键词" source="/Users/peter/mysource/mygithub/rf/compass/devops/业务关键词">
-<suite id="s1-s1-s1" name="API" source="/Users/peter/mysource/mygithub/rf/compass/devops/业务关键词/API">
-<suite id="s1-s1-s1-s1" name="Devops业务关键词" source="/Users/peter/mysource/mygithub/rf/compass/devops/业务关键词/API/devops业务关键词.txt">
-<test id="s1-s1-s1-s1-t1" name="log">
+<suite id="s1-s1" name="测试案例" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例">
+<suite id="s1-s1-s1" name="API" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例/API">
+<suite id="s1-s1-s1-s1" name="API" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例/API/API.txt">
+<test id="s1-s1-s1-s1-t1" name="devops_获取workplace">
+<kw name="devops_获取workplace" library="devops业务关键词">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
+<arg>X-Tenant=peter</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20180919 13:53:56.730" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'peter'}</msg>
+<status status="PASS" starttime="20180919 13:53:56.730" endtime="20180919 13:53:56.731"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>compass</arg>
+<arg>http://${api_ip}:${api_port}/apis/admin.devops.caicloud.io/</arg>
+<arg>${header}</arg>
+</arguments>
+<msg timestamp="20180919 13:53:56.732" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.40:30069/apis/admin.devops.caicloud.io/, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'peter'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20180919 13:53:56.731" endtime="20180919 13:53:56.732"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>compass</arg>
+<arg>${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20180919 13:54:16.288" level="INFO">Post Request using : alias=compass, uri=/v1/workspaces, data=&lt;empty&gt;, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'peter'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20180919 13:54:16.289" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20180919 13:53:56.733" endtime="20180919 13:54:16.289"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20180919 13:54:16.298" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20180919 13:54:16.290" endtime="20180919 13:54:16.298"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${resp.json()}</arg>
+</arguments>
+<assign>
+<var>${content}</var>
+</assign>
+<msg timestamp="20180919 13:54:16.301" level="INFO">${content} = {'metadata': {'total': 7}, 'items': [{'name': 'phpgood', 'alias': 'phpgood', 'description': '', 'owner': 'admin', 'scm': {'type': 'Github', 'authType': 'Token', 'server': 'https://github.com', 'userna...</msg>
+<status status="PASS" starttime="20180919 13:54:16.299" endtime="20180919 13:54:16.301"></status>
+</kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
-<arg>"abc"</arg>
+<arg>${content}</arg>
 </arguments>
-<msg timestamp="20180918 10:28:03.156" level="INFO">"abc"</msg>
-<status status="PASS" starttime="20180918 10:28:03.155" endtime="20180918 10:28:03.156"></status>
+<msg timestamp="20180919 13:54:16.302" level="INFO">{'metadata': {'total': 7}, 'items': [{'name': 'phpgood', 'alias': 'phpgood', 'description': '', 'owner': 'admin', 'scm': {'type': 'Github', 'authType': 'Token', 'server': 'https://github.com', 'username': ' ', 'token': '7a1a1b8155e234ee4be70d8600bc66ec358885da'}, 'pipelineCount': 1, 'cargo': {'name': 'default', 'project': 'peter_phpgood', 'host': 'cargo-regression-b.caicloudprivatetest.com'}, 'cacheDependencies': {'Maven': False, 'NPM': False}, 'workerQuota': {'limitsCPU': '1', 'limitsMemory': '2Gi', 'requestsCPU': '0.5', 'requestsMemory': '1Gi'}, 'creationTime': '2018-09-17T14:24:24+08:00', 'lastUpdateTime': '2018-09-17T14:24:24+08:00'}, {'name': 'python-git', 'alias': 'python-git', 'description': '', 'owner': 'admin', 'scm': {'type': 'Github', 'authType': 'Token', 'server': 'https://github.com', 'username': ' ', 'token': '7a1a1b8155e234ee4be70d8600bc66ec358885da'}, 'pipelineCount': 1, 'cargo': {'name': 'default', 'project': 'peter_python-git', 'host': 'cargo-regression-b.caicloudprivatetest.com'}, 'cacheDependencies': {'Maven': False, 'NPM': False}, 'workerQuota': {'limitsCPU': '1', 'limitsMemory': '2Gi', 'requestsCPU': '0.5', 'requestsMemory': '1Gi'}, 'creationTime': '2018-09-17T13:54:47+08:00', 'lastUpdateTime': '2018-09-17T13:54:47+08:00'}, {'name': 'github-golang', 'alias': 'github-golang', 'description': '', 'owner': 'admin', 'scm': {'type': 'Github', 'authType': 'Token', 'server': 'https://github.com', 'username': ' ', 'token': '7a1a1b8155e234ee4be70d8600bc66ec358885da'}, 'pipelineCount': 1, 'cargo': {'name': 'default', 'project': 'peter_github-golang', 'host': 'cargo-regression-b.caicloudprivatetest.com'}, 'cacheDependencies': {'Maven': False, 'NPM': False}, 'workerQuota': {'limitsCPU': '1', 'limitsMemory': '2Gi', 'requestsCPU': '0.5', 'requestsMemory': '1Gi'}, 'creationTime': '2018-09-14T18:01:54+08:00', 'lastUpdateTime': '2018-09-14T18:01:54+08:00'}, {'name': 'github-gradle', 'alias': 'github-gradle', 'description': '', 'owner': 'admin', 'scm': {'type': 'Github', 'authType': 'Token', 'server': 'https://github.com', 'username': ' ', 'token': '7a1a1b8155e234ee4be70d8600bc66ec358885da'}, 'pipelineCount': 1, 'cargo': {'name': 'default', 'project': 'peter_github-gradle', 'host': 'cargo-regression-b.caicloudprivatetest.com'}, 'cacheDependencies': {'Maven': False, 'NPM': False}, 'workerQuota': {'limitsCPU': '1', 'limitsMemory': '2Gi', 'requestsCPU': '0.5', 'requestsMemory': '1Gi'}, 'creationTime': '2018-09-14T15:39:13+08:00', 'lastUpdateTime': '2018-09-14T15:39:13+08:00'}, {'name': 'svnsvn', 'alias': 'svnsvn', 'description': '', 'owner': 'admin', 'scm': {'type': 'SVN', 'authType': 'Password', 'server': 'svn://svnbucket.com/zhujian/test', 'username': 'zhujian', 'password': 'passw0rd', 'token': 'zhujian:passw0rd'}, 'pipelineCount': 1, 'cargo': {'name': 'default', 'project': 'peter_svnsvn', 'host': 'cargo-regression-b.caicloudprivatetest.com'}, 'cacheDependencies': {'Maven': False, 'NPM': False}, 'workerQuota': {'limitsCPU': '1', 'limitsMemory': '2Gi', 'requestsCPU': '0.5', 'requestsMemory': '1Gi'}, 'creationTime': '2018-09-13T17:58:12+08:00', 'lastUpdateTime': '2018-09-13T17:58:12+08:00'}, {'name': 'javagitlab', 'alias': 'javagitlab', 'description': '', 'owner': 'admin', 'scm': {'type': 'Gitlab', 'authType': 'Token', 'server': 'https://gitlab.com', 'token': 'ssuhoC-2peeymTzZm12q'}, 'pipelineCount': 1, 'cargo': {'name': 'default', 'project': 'peter_javagitlab', 'host': 'cargo-regression-b.caicloudprivatetest.com'}, 'cacheDependencies': {'Maven': False, 'NPM': False}, 'workerQuota': {'limitsCPU': '1', 'limitsMemory': '2Gi', 'requestsCPU': '0.5', 'requestsMemory': '1Gi'}, 'creationTime': '2018-09-13T13:51:08+08:00', 'lastUpdateTime': '2018-09-13T13:51:08+08:00'}, {'name': 'javapro', 'alias': 'javapro', 'description': '', 'owner': 'admin', 'scm': {'type': 'Github', 'authType': 'Token', 'server': 'https://github.com', 'username': ' ', 'token': '7a1a1b8155e234ee4be70d8600bc66ec358885da'}, 'pipelineCount': 2, 'cargo': {'name': 'default', 'project': 'peter_javapro', 'host': 'cargo-regression-b.caicloudprivatetest.com'}, 'cacheDependencies': {'Maven': False, 'NPM': False}, 'workerQuota': {'limitsCPU': '1', 'limitsMemory': '2Gi', 'requestsCPU': '0.5', 'requestsMemory': '1Gi'}, 'creationTime': '2018-09-13T10:33:29+08:00', 'lastUpdateTime': '2018-09-13T10:33:29+08:00'}]}</msg>
+<status status="PASS" starttime="20180919 13:54:16.301" endtime="20180919 13:54:16.303"></status>
 </kw>
-<status status="PASS" starttime="20180918 10:28:03.154" endtime="20180918 10:28:03.156" critical="yes"></status>
+<status status="PASS" starttime="20180919 13:53:56.729" endtime="20180919 13:54:16.304"></status>
+</kw>
+<status status="PASS" starttime="20180919 13:53:56.728" endtime="20180919 13:54:16.304" critical="yes"></status>
 </test>
-<status status="PASS" starttime="20180918 10:28:03.130" endtime="20180918 10:28:03.157"></status>
+<status status="PASS" starttime="20180919 13:53:56.473" endtime="20180919 13:54:16.306"></status>
 </suite>
-<status status="PASS" starttime="20180918 10:28:03.125" endtime="20180918 10:28:03.160"></status>
+<status status="PASS" starttime="20180919 13:53:56.469" endtime="20180919 13:54:16.313"></status>
 </suite>
-<status status="PASS" starttime="20180918 10:28:03.122" endtime="20180918 10:28:03.162"></status>
+<status status="PASS" starttime="20180919 13:53:56.466" endtime="20180919 13:54:16.318"></status>
 </suite>
-<status status="PASS" starttime="20180918 10:28:03.096" endtime="20180918 10:28:03.164"></status>
+<status status="PASS" starttime="20180919 13:53:56.437" endtime="20180919 13:54:16.327"></status>
 </suite>
 <statistics>
 <total>
@@ -32,12 +94,11 @@
 </tag>
 <suite>
 <stat pass="1" fail="0" id="s1" name="Devops">Devops</stat>
-<stat pass="1" fail="0" id="s1-s1" name="业务关键词">Devops.业务关键词</stat>
-<stat pass="1" fail="0" id="s1-s1-s1" name="API">Devops.业务关键词.API</stat>
-<stat pass="1" fail="0" id="s1-s1-s1-s1" name="Devops业务关键词">Devops.业务关键词.API.Devops业务关键词</stat>
+<stat pass="1" fail="0" id="s1-s1" name="测试案例">Devops.测试案例</stat>
+<stat pass="1" fail="0" id="s1-s1-s1" name="API">Devops.测试案例.API</stat>
+<stat pass="1" fail="0" id="s1-s1-s1-s1" name="API">Devops.测试案例.API.API</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20180918 10:28:03.133" level="WARN">Imported resource file '/Users/peter/mysource/mygithub/rf/compass/devops/环境信息/API/globalEnv.txt' is empty.</msg>
 </errors>
 </robot>

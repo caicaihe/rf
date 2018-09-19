@@ -1,3 +1,5 @@
+*** Settings ***
+Resource    ../../业务关键词/API/devops业务关键词.txt
 *** Test Cases ***
-logaaa
-    log   "abc"
+devops_获取workplace
+    devops_获取workplace

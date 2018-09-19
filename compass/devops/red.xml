@@ -2,6 +2,7 @@
 <projectConfiguration>
     <configVersion>2</configVersion>
     <relativeTo>WORKSPACE</relativeTo>
+    <referencedLibrary type="PYTHON" name="RequestsLibrary" path="/usr/local/lib/python3.7/site-packages"/>
     <pythonpath/>
     <classpath/>
     <excludedForValidation/>
