@@ -15,6 +15,12 @@
 	<section name="org.robotframework.ide.project.editor.activePage.bd">
 		<item value="ProjectValidationConfigurationEditorPart" key="activePage"/>
 	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/业务关键词/UI/devops业务关键词.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/业务关键词/UI/test.txt">
+		<item value="" key="activePage"/>
+	</section>
 	<section name="org.robotframework.ide.tableditor.activePage./bd/sss.robot">
 		<item value="" key="activePage"/>
 	</section>

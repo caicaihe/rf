@@ -1,0 +1,7 @@
+*** Settings ***
+Library    MySelenium
+
+
+*** Test Cases ***
+gogo
+    myopen

@@ -1,0 +1,11 @@
+*** Settings ***
+Resource          ../../环境信息/globalEnv.txt
+Library           Selenium2Library
+Library    myselenium
+
+
+
+*** Test Cases ***
+登录
+    myopen
+   

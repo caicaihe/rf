@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="RequestsLibrary" type="library" format="ROBOT" generated="20180918 19:08:06">
+<keywordspec name="RequestsLibrary" type="library" format="ROBOT" generated="20180921 15:33:25">
 <version></version>
 <scope>global</scope>
 <namedargs>yes</namedargs>
-<doc>RequestsLibrary is a HTTP client keyword library that uses
+<doc>RequestsLibrary are a HTTP client keyword library that uses
 the requests module from Kenneth Reitz
 https://github.com/kennethreitz/requests
 

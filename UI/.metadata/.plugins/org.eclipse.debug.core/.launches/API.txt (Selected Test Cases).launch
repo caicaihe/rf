@@ -17,7 +17,7 @@
 <stringAttribute key="Remote agent" value="false"/>
 <stringAttribute key="Robot arguments" value=""/>
 <mapAttribute key="Test suites">
-<mapEntry key="测试案例/API/API.txt" value="devops_获取workplace"/>
+<mapEntry key="测试案例/API/API.txt" value="devops_持续交付_流水线"/>
 </mapAttribute>
 <stringAttribute key="Version of configuration" value="1"/>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">

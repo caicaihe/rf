@@ -1,0 +1,5 @@
+*** Settings ***
+Resource    ../../业务关键词/API/devops业务关键词.txt
+*** Test Cases ***
+devops_持续交付_流水线
+    devops_获取workplace

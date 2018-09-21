@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec name="myselenium" type="library" format="ROBOT" generated="20180921 15:07:52">
+<version></version>
+<scope>global</scope>
+<namedargs>yes</namedargs>
+<doc>this is init info
+    </doc>
+<kw name="Myopen">
+<arguments>
+</arguments>
+<doc>my funciont info</doc>
+<tags>
+</tags>
+</kw>
+</keywordspec>

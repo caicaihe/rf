@@ -3,6 +3,9 @@
     <configVersion>2</configVersion>
     <relativeTo>WORKSPACE</relativeTo>
     <referencedLibrary type="PYTHON" name="RequestsLibrary" path="/usr/local/lib/python3.7/site-packages"/>
+    <referencedLibrary type="PYTHON" name="Selenium2Library" path="/usr/local/lib/python3.7/site-packages"/>
+    <referencedLibrary type="PYTHON" name="SeleniumLibrary" path="/usr/local/lib/python3.7/site-packages"/>
+    <referencedLibrary type="PYTHON" name="myselenium" path="/Users/peter/mysource/mygithub/rf/compass/devops/RobotCustomizdeLibraries"/>
     <pythonpath/>
     <classpath/>
     <excludedForValidation/>
