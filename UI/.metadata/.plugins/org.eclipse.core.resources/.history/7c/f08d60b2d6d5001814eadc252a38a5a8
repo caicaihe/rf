@@ -1,0 +1,11 @@
+*** Settings ***
+Resource          ../../环境信息/globalEnv.txt
+
+Library    Selenium2Library
+
+
+
+*** Test Cases ***
+登录
+    Open Browser    http://${compass_ip}:${web_port}   
+   

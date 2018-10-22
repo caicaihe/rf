@@ -1,5 +1,0 @@
-*** Settings ***
-Resource    ../../业务关键词/API/devops业务关键词.txt
-*** Test Cases ***
-devops_获取workplace
-    devops_获取workplace

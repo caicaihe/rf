@@ -1,8 +1,0 @@
-from selenium import webdriver
-class abc():
-    def open(self):
-        url = "http://www.baidu.com"
-        browser = webdriver.Firefox()
-        browser.get(url)
-
-

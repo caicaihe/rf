@@ -1,50 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20180921 15:34:24.773">
+<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20181022 18:46:27.810">
 <suite id="s1" name="Devops" source="/Users/peter/mysource/mygithub/rf/compass/devops">
 <suite id="s1-s1" name="测试案例" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例">
-<suite id="s1-s1-s1" name="API" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例/API">
-<suite id="s1-s1-s1-s1" name="API" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例/API/API.txt">
-<test id="s1-s1-s1-s1-t1" name="devops_持续交付_流水线">
-<kw name="devops_获取workplace" library="devopsAPI业务关键词">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<suite id="s1-s1-s1" name="UI" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例/UI">
+<suite id="s1-s1-s1-s1" name="UItest" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例/UI/UItest.txt">
+<test id="s1-s1-s1-s1-t1" name="login">
+<kw name="登录" library="devopsUI业务关键词">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the given ``url``.</doc>
 <arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=peter</arg>
+<arg>http://${compass_ip}:${web_login_port}</arg>
 </arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20180921 15:34:25.091" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'peter'}</msg>
-<status status="PASS" starttime="20180921 15:34:25.090" endtime="20180921 15:34:25.091"></status>
+<msg timestamp="20181022 18:46:28.252" level="INFO">Opening browser 'firefox' to base url 'http://192.168.129.40:6062'.</msg>
+<status status="PASS" starttime="20181022 18:46:28.252" endtime="20181022 18:46:35.300"></status>
 </kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
 <arguments>
-<arg>compass</arg>
-<arg>http://${api_ip}:${api_port}/apis/admin.devops.caicloud.io/</arg>
-<arg>${header}</arg>
+<arg>css=input[type=\"text\"]</arg>
+<arg>admin</arg>
 </arguments>
-<msg timestamp="20180921 15:34:25.094" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.40:30069/apis/admin.devops.caicloud.io/, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'peter'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20180921 15:34:25.092" endtime="20180921 15:34:25.094"></status>
+<msg timestamp="20181022 18:46:35.303" level="INFO">Typing text 'admin' into text field 'css=input[type="text"]'.</msg>
+<status status="PASS" starttime="20181022 18:46:35.301" endtime="20181022 18:46:35.375"></status>
 </kw>
-<kw name="Post Request" library="RequestsLibrary">
-<doc>Send a POST request on the session object found using the</doc>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
 <arguments>
-<arg>compass</arg>
-<arg>${url}</arg>
-<arg>headers=${header}</arg>
+<arg>css=input[type=\"password\"]</arg>
+<arg>Pwd123456</arg>
 </arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20180921 15:35:40.352" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x104e9d1d0&gt;: Failed to establish a new connection: [Errno 60] Operation timed out')': /apis/admin.devops.caicloud.io//v1/workspaces</msg>
-<status status="FAIL" starttime="20180921 15:34:25.095" endtime="20180921 15:35:57.892"></status>
+<msg timestamp="20181022 18:46:35.377" level="INFO">Typing text 'Pwd123456' into text field 'css=input[type="password"]'.</msg>
+<status status="PASS" starttime="20181022 18:46:35.376" endtime="20181022 18:46:35.454"></status>
 </kw>
-<status status="FAIL" starttime="20180921 15:34:25.089" endtime="20180921 15:35:57.893"></status>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=/html/body/main/div/div[1]/div[2]/div[2]/form/button</arg>
+</arguments>
+<msg timestamp="20181022 18:46:35.455" level="INFO">Clicking element 'xpath=/html/body/main/div/div[1]/div[2]/div[2]/form/button'.</msg>
+<status status="PASS" starttime="20181022 18:46:35.455" endtime="20181022 18:46:35.701"></status>
 </kw>
+<status status="PASS" starttime="20181022 18:46:28.251" endtime="20181022 18:46:35.702"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<msg timestamp="20181022 18:46:40.705" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20181022 18:46:35.702" endtime="20181022 18:46:40.705"></status>
+</kw>
+<kw name="进入用户" library="devopsUI业务关键词">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=/html/body/div[1]/main/div/ul[1]/li[2]</arg>
+</arguments>
+<msg timestamp="20181022 18:46:40.708" level="INFO">Clicking element 'xpath=/html/body/div[1]/main/div/ul[1]/li[2]'.</msg>
+<status status="PASS" starttime="20181022 18:46:40.707" endtime="20181022 18:46:40.969"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>2</arg>
+</arguments>
+<msg timestamp="20181022 18:46:42.970" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20181022 18:46:40.969" endtime="20181022 18:46:42.971"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=/html/body/div[1]/main/div/ul[2]/li/div</arg>
+</arguments>
+<msg timestamp="20181022 18:46:42.973" level="INFO">Clicking element 'xpath=/html/body/div[1]/main/div/ul[2]/li/div'.</msg>
+<status status="PASS" starttime="20181022 18:46:42.971" endtime="20181022 18:46:43.220"></status>
+</kw>
+<status status="PASS" starttime="20181022 18:46:40.706" endtime="20181022 18:46:43.221"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<msg timestamp="20181022 18:46:48.225" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20181022 18:46:43.222" endtime="20181022 18:46:48.226"></status>
+</kw>
+<kw name="退出登录" library="devopsUI业务关键词">
+<kw name="Mouse Over" library="Selenium2Library">
+<doc>Simulates hovering mouse over the element ``locator``.</doc>
+<arguments>
+<arg>xpath=/html/body/div[1]/div/div[2]/div[1]/div[2]/div[3]</arg>
+</arguments>
+<msg timestamp="20181022 18:46:48.228" level="INFO">Simulating Mouse Over on element 'xpath=/html/body/div[1]/div/div[2]/div[1]/div[2]/div[3]'.</msg>
+<status status="PASS" starttime="20181022 18:46:48.228" endtime="20181022 18:46:48.531"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>2</arg>
+</arguments>
+<msg timestamp="20181022 18:46:50.534" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20181022 18:46:48.532" endtime="20181022 18:46:50.535"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>css=.popup-user.popup-container&gt;.item</arg>
+</arguments>
+<msg timestamp="20181022 18:46:50.537" level="INFO">Clicking element 'css=.popup-user.popup-container&gt;.item'.</msg>
+<status status="PASS" starttime="20181022 18:46:50.536" endtime="20181022 18:46:54.451"></status>
+</kw>
+<status status="PASS" starttime="20181022 18:46:48.226" endtime="20181022 18:46:54.452"></status>
+</kw>
+<status status="PASS" starttime="20181022 18:46:28.250" endtime="20181022 18:46:54.452" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20181022 18:46:27.900" endtime="20181022 18:46:54.453"></status>
+</suite>
+<status status="PASS" starttime="20181022 18:46:27.896" endtime="20181022 18:46:54.457"></status>
+</suite>
+<status status="PASS" starttime="20181022 18:46:27.892" endtime="20181022 18:46:54.460"></status>
+</suite>
+<status status="PASS" starttime="20181022 18:46:27.857" endtime="20181022 18:46:54.462"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Devops">Devops</stat>
+<stat pass="1" fail="0" id="s1-s1" name="测试案例">Devops.测试案例</stat>
+<stat pass="1" fail="0" id="s1-s1-s1" name="UI">Devops.测试案例.UI</stat>
+<stat pass="1" fail="0" id="s1-s1-s1-s1" name="UItest">Devops.测试案例.UI.UItest</stat>
+</suite>
+</statistics>
 <errors>
-<msg timestamp="20180921 15:35:40.352" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x104e9d1d0&gt;: Failed to establish a new connection: [Errno 60] Operation timed out')': /apis/admin.devops.caicloud.io//v1/workspaces</msg>
 </errors>
 </robot>

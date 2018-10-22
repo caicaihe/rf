@@ -1,0 +1,9 @@
+*** Settings ***
+Resource    ../../业务关键词/UI/devopsUI业务关键词.txt
+*** Test Cases ***
+login
+    登录
+    Sleep    5    
+    进入用户
+    Sleep    3
+    退出登录
