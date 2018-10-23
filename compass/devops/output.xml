@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20181022 18:46:27.810">
+<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20181023 11:20:21.380">
 <suite id="s1" name="Devops" source="/Users/peter/mysource/mygithub/rf/compass/devops">
 <suite id="s1-s1" name="测试案例" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例">
 <suite id="s1-s1-s1" name="UI" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试案例/UI">
@@ -11,8 +11,8 @@
 <arguments>
 <arg>http://${compass_ip}:${web_login_port}</arg>
 </arguments>
-<msg timestamp="20181022 18:46:28.252" level="INFO">Opening browser 'firefox' to base url 'http://192.168.129.40:6062'.</msg>
-<status status="PASS" starttime="20181022 18:46:28.252" endtime="20181022 18:46:35.300"></status>
+<msg timestamp="20181023 11:20:21.896" level="INFO">Opening browser 'firefox' to base url 'http://192.168.129.40:6062'.</msg>
+<status status="PASS" starttime="20181023 11:20:21.896" endtime="20181023 11:20:30.031"></status>
 </kw>
 <kw name="Input Text" library="Selenium2Library">
 <doc>Types the given ``text`` into text field identified by ``locator``.</doc>
@@ -20,8 +20,8 @@
 <arg>css=input[type=\"text\"]</arg>
 <arg>admin</arg>
 </arguments>
-<msg timestamp="20181022 18:46:35.303" level="INFO">Typing text 'admin' into text field 'css=input[type="text"]'.</msg>
-<status status="PASS" starttime="20181022 18:46:35.301" endtime="20181022 18:46:35.375"></status>
+<msg timestamp="20181023 11:20:30.033" level="INFO">Typing text 'admin' into text field 'css=input[type="text"]'.</msg>
+<status status="PASS" starttime="20181023 11:20:30.032" endtime="20181023 11:20:30.169"></status>
 </kw>
 <kw name="Input Text" library="Selenium2Library">
 <doc>Types the given ``text`` into text field identified by ``locator``.</doc>
@@ -29,61 +29,64 @@
 <arg>css=input[type=\"password\"]</arg>
 <arg>Pwd123456</arg>
 </arguments>
-<msg timestamp="20181022 18:46:35.377" level="INFO">Typing text 'Pwd123456' into text field 'css=input[type="password"]'.</msg>
-<status status="PASS" starttime="20181022 18:46:35.376" endtime="20181022 18:46:35.454"></status>
+<msg timestamp="20181023 11:20:30.171" level="INFO">Typing text 'Pwd123456' into text field 'css=input[type="password"]'.</msg>
+<status status="PASS" starttime="20181023 11:20:30.169" endtime="20181023 11:20:30.309"></status>
 </kw>
 <kw name="Click Element" library="Selenium2Library">
 <doc>Click element identified by ``locator``.</doc>
 <arguments>
 <arg>xpath=/html/body/main/div/div[1]/div[2]/div[2]/form/button</arg>
 </arguments>
-<msg timestamp="20181022 18:46:35.455" level="INFO">Clicking element 'xpath=/html/body/main/div/div[1]/div[2]/div[2]/form/button'.</msg>
-<status status="PASS" starttime="20181022 18:46:35.455" endtime="20181022 18:46:35.701"></status>
+<msg timestamp="20181023 11:20:30.310" level="INFO">Clicking element 'xpath=/html/body/main/div/div[1]/div[2]/div[2]/form/button'.</msg>
+<status status="PASS" starttime="20181023 11:20:30.310" endtime="20181023 11:20:30.564"></status>
 </kw>
-<status status="PASS" starttime="20181022 18:46:28.251" endtime="20181022 18:46:35.702"></status>
+<status status="PASS" starttime="20181023 11:20:21.894" endtime="20181023 11:20:30.567"></status>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <doc>Pauses the test executed for the given time.</doc>
 <arguments>
 <arg>5</arg>
 </arguments>
-<msg timestamp="20181022 18:46:40.705" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20181022 18:46:35.702" endtime="20181022 18:46:40.705"></status>
+<msg timestamp="20181023 11:20:35.569" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20181023 11:20:30.567" endtime="20181023 11:20:35.569"></status>
 </kw>
 <kw name="进入用户" library="devopsUI业务关键词">
+<arguments>
+<arg>devops</arg>
+</arguments>
 <kw name="Click Element" library="Selenium2Library">
 <doc>Click element identified by ``locator``.</doc>
 <arguments>
-<arg>xpath=/html/body/div[1]/main/div/ul[1]/li[2]</arg>
+<arg>xpath=//li[text()="使用者入口"]</arg>
 </arguments>
-<msg timestamp="20181022 18:46:40.708" level="INFO">Clicking element 'xpath=/html/body/div[1]/main/div/ul[1]/li[2]'.</msg>
-<status status="PASS" starttime="20181022 18:46:40.707" endtime="20181022 18:46:40.969"></status>
+<msg timestamp="20181023 11:20:35.572" level="INFO">Clicking element 'xpath=//li[text()="使用者入口"]'.</msg>
+<status status="PASS" starttime="20181023 11:20:35.572" endtime="20181023 11:20:35.842"></status>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <doc>Pauses the test executed for the given time.</doc>
 <arguments>
 <arg>2</arg>
 </arguments>
-<msg timestamp="20181022 18:46:42.970" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20181022 18:46:40.969" endtime="20181022 18:46:42.971"></status>
+<msg timestamp="20181023 11:20:37.844" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20181023 11:20:35.843" endtime="20181023 11:20:37.845"></status>
 </kw>
 <kw name="Click Element" library="Selenium2Library">
 <doc>Click element identified by ``locator``.</doc>
 <arguments>
-<arg>xpath=/html/body/div[1]/main/div/ul[2]/li/div</arg>
+<arg>xpath=//div[text()='${username}']</arg>
 </arguments>
-<msg timestamp="20181022 18:46:42.973" level="INFO">Clicking element 'xpath=/html/body/div[1]/main/div/ul[2]/li/div'.</msg>
-<status status="PASS" starttime="20181022 18:46:42.971" endtime="20181022 18:46:43.220"></status>
+<msg timestamp="20181023 11:20:37.848" level="INFO">Clicking element 'xpath=//div[text()='devops']'.</msg>
+<status status="PASS" starttime="20181023 11:20:37.846" endtime="20181023 11:20:38.123"></status>
 </kw>
-<status status="PASS" starttime="20181022 18:46:40.706" endtime="20181022 18:46:43.221"></status>
+<status status="PASS" starttime="20181023 11:20:35.570" endtime="20181023 11:20:38.124"></status>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <doc>Pauses the test executed for the given time.</doc>
 <arguments>
 <arg>5</arg>
 </arguments>
-<msg timestamp="20181022 18:46:48.225" level="INFO">Slept 5 seconds</msg>
-<status status="PASS" starttime="20181022 18:46:43.222" endtime="20181022 18:46:48.226"></status>
+<msg timestamp="20181023 11:20:43.127" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20181023 11:20:38.125" endtime="20181023 11:20:43.128"></status>
 </kw>
 <kw name="退出登录" library="devopsUI业务关键词">
 <kw name="Mouse Over" library="Selenium2Library">
@@ -91,36 +94,36 @@
 <arguments>
 <arg>xpath=/html/body/div[1]/div/div[2]/div[1]/div[2]/div[3]</arg>
 </arguments>
-<msg timestamp="20181022 18:46:48.228" level="INFO">Simulating Mouse Over on element 'xpath=/html/body/div[1]/div/div[2]/div[1]/div[2]/div[3]'.</msg>
-<status status="PASS" starttime="20181022 18:46:48.228" endtime="20181022 18:46:48.531"></status>
+<msg timestamp="20181023 11:20:43.133" level="INFO">Simulating Mouse Over on element 'xpath=/html/body/div[1]/div/div[2]/div[1]/div[2]/div[3]'.</msg>
+<status status="PASS" starttime="20181023 11:20:43.132" endtime="20181023 11:20:43.421"></status>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <doc>Pauses the test executed for the given time.</doc>
 <arguments>
 <arg>2</arg>
 </arguments>
-<msg timestamp="20181022 18:46:50.534" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20181022 18:46:48.532" endtime="20181022 18:46:50.535"></status>
+<msg timestamp="20181023 11:20:45.422" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20181023 11:20:43.421" endtime="20181023 11:20:45.423"></status>
 </kw>
 <kw name="Click Element" library="Selenium2Library">
 <doc>Click element identified by ``locator``.</doc>
 <arguments>
 <arg>css=.popup-user.popup-container&gt;.item</arg>
 </arguments>
-<msg timestamp="20181022 18:46:50.537" level="INFO">Clicking element 'css=.popup-user.popup-container&gt;.item'.</msg>
-<status status="PASS" starttime="20181022 18:46:50.536" endtime="20181022 18:46:54.451"></status>
+<msg timestamp="20181023 11:20:45.425" level="INFO">Clicking element 'css=.popup-user.popup-container&gt;.item'.</msg>
+<status status="PASS" starttime="20181023 11:20:45.424" endtime="20181023 11:20:50.222"></status>
 </kw>
-<status status="PASS" starttime="20181022 18:46:48.226" endtime="20181022 18:46:54.452"></status>
+<status status="PASS" starttime="20181023 11:20:43.130" endtime="20181023 11:20:50.222"></status>
 </kw>
-<status status="PASS" starttime="20181022 18:46:28.250" endtime="20181022 18:46:54.452" critical="yes"></status>
+<status status="PASS" starttime="20181023 11:20:21.893" endtime="20181023 11:20:50.223" critical="yes"></status>
 </test>
-<status status="PASS" starttime="20181022 18:46:27.900" endtime="20181022 18:46:54.453"></status>
+<status status="PASS" starttime="20181023 11:20:21.482" endtime="20181023 11:20:50.226"></status>
 </suite>
-<status status="PASS" starttime="20181022 18:46:27.896" endtime="20181022 18:46:54.457"></status>
+<status status="PASS" starttime="20181023 11:20:21.477" endtime="20181023 11:20:50.231"></status>
 </suite>
-<status status="PASS" starttime="20181022 18:46:27.892" endtime="20181022 18:46:54.460"></status>
+<status status="PASS" starttime="20181023 11:20:21.474" endtime="20181023 11:20:50.234"></status>
 </suite>
-<status status="PASS" starttime="20181022 18:46:27.857" endtime="20181022 18:46:54.462"></status>
+<status status="PASS" starttime="20181023 11:20:21.433" endtime="20181023 11:20:50.236"></status>
 </suite>
 <statistics>
 <total>

@@ -1270,3 +1270,52 @@ Binding(COMMAND+=,
 
 !ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-10-22 16:28:08.468
 !MESSAGE No repository found at file:/Users/peter/Documents/文稿%20-%20caicloud的MacBook%20Air%20(4)/software/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/127/data/listener_1925729951/.
+!SESSION 2018-10-23 10:16:45.458 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=zh_CN
+Framework arguments:  -keyring /Users/peter/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/peter/.eclipse_keyring
+
+!ENTRY org.eclipse.jface 2 0 2018-10-23 10:17:01.677
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-10-23 10:17:01.677
+!MESSAGE A conflict occurred for COMMAND+-:
+Binding(COMMAND+-,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.zoomOut,Zoom Out,
+		Zoom out text, decrease default font size for text editors,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@59db8216,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(COMMAND+-,
+	ParameterizedCommand(Command(org.robotframework.red.zoomOutText,Zoom Out,
+		,
+		Category(org.robotframework.ide.eclipse.robotCommands,Robot,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7bb86ac,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.robotframework.ide.eclipse.tableeditor.sources.context,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-10-23 10:17:01.677
+!MESSAGE A conflict occurred for COMMAND+=:
+Binding(COMMAND+=,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.zoomIn,Zoom In,
+		Zoom in text, increase default font size for text editors,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@33bf2602,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(COMMAND+=,
+	ParameterizedCommand(Command(org.robotframework.red.zoomInText,Zoom In,
+		,
+		Category(org.robotframework.ide.eclipse.robotCommands,Robot,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4724b2c1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.robotframework.ide.eclipse.tableeditor.sources.context,,,system)
+
+!ENTRY org.eclipse.core.net 1 0 2018-10-23 10:17:02.007
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
