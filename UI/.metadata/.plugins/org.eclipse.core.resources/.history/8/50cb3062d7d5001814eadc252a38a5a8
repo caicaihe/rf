@@ -1,6 +1,0 @@
-*** Variables ***
-${compass_ip}         192.168.129.40    # 本地地址
-${api_port}       30069    # 端口号
-${web_port}       6060
-${username}    admin
-${password}    Pwd123456

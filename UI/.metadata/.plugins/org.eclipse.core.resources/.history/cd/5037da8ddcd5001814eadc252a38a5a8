@@ -1,5 +1,0 @@
-*** Settings ***
-Resource    ../../业务关键词/UI/devopsUI业务关键词.txt
-*** Test Cases ***
-login
-    登录

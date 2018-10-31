@@ -13,10 +13,10 @@ Library    Selenium2Library
     Click element    xpath=/html/body/main/div/div[1]/div[2]/div[2]/form/button     
     
 进入用户
-    [Arguments]      ${username}
+    [Arguments]      ${spacename}
     Click Element    xpath=//li[text()="使用者入口"]
     Sleep    2
-    Click Element    xpath=//div[text()='${username}']    
+    Click Element    xpath=//div[text()='${spacename}']    
     
 退出登录
     Mouse Over    xpath=/html/body/div[1]/div/div[2]/div[1]/div[2]/div[3]
