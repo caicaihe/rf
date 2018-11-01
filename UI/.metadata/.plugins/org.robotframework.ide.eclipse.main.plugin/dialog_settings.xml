@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.robotframework.ide.tableditor.activePage./devops/环境信息/globalEnv.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/测试案例/UI/UItest2.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/业务关键词/API/devops业务关键词.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/环境信息/API/globalEnv.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/login/login.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.project.editor.activePage.devops">
+		<item value="ReferencedLibrariesProjectConfigurationEditorPart" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/测试案例/API/API.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/业务关键词/API/devopsAPI业务关键词.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/测试用例/API/API.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/测试数据/API/APIData.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/业务关键词/UI/devopsUI业务关键词.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.project.editor.activePage.bd">
+		<item value="ProjectValidationConfigurationEditorPart" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/业务关键词/UI/devops业务关键词.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/业务关键词/UI/test.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./bd/sss.robot">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/测试用例/API/APITEST.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/测试案例/UI/UItest.txt">
+		<item value="" key="activePage"/>
+	</section>
+	<section name="org.robotframework.ide.tableditor.activePage./devops/测试案例/API/APITEST.txt">
+		<item value="" key="activePage"/>
+	</section>
+</section>

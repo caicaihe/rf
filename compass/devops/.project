@@ -14,21 +14,4 @@
 	<natures>
 		<nature>org.robotframework.ide.eclipse.main.plugin.robotNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>libspecs/RequestsLibrary.py</name>
-			<type>1</type>
-			<location>/usr/local/lib/python3.7/site-packages/RequestsLibrary/RequestsKeywords.py</location>
-		</link>
-		<link>
-			<name>libspecs/Selenium2Library.py</name>
-			<type>1</type>
-			<location>/usr/local/lib/python3.7/site-packages/Selenium2Library/__init__.py</location>
-		</link>
-		<link>
-			<name>libspecs/SeleniumLibrary.py</name>
-			<type>1</type>
-			<location>/usr/local/lib/python3.7/site-packages/SeleniumLibrary/__init__.py</location>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -1,0 +1,6 @@
+*** Settings ***
+Resource    ../../业务关键词/API/devopsAPI业务关键词.txt
+*** Test Cases ***    
+devops_持续交付golang流水线
+    log    devops_pipeline执行结果
+    devops_pipeline执行结果
