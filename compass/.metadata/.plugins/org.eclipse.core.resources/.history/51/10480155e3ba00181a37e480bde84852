@@ -1,4 +1,0 @@
-*** Setting ***
-*** Test Cases ***
-login
-    log    'abc'  
