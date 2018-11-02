@@ -10,4 +10,4 @@ ${pipelineName_github}    abcgithub
 ${workspaceName_gitlab}   abcgitlab
 ${pipelineName_gitlab}    abcgitlab
 ${password}    Pwd123456
-${github_token}    b59636936bc67cf216ba1c15282f545b0f23af81
+${github_token}    ZGYwNDIxNTAzMDc4N2ZkYjA2ZDk1MTdjZDdmNjk4MjYwZGY5MzNlYQ==

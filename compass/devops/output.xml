@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20181101 18:09:13.493">
+<robot generator="Robot 3.0.4 (Python 3.7.0 on darwin)" generated="20181102 14:53:33.757">
 <suite id="s1" name="Devops" source="/Users/peter/mysource/mygithub/rf/compass/devops">
 <suite id="s1-s1" name="测试用例" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试用例">
 <suite id="s1-s1-s1" name="API" source="/Users/peter/mysource/mygithub/rf/compass/devops/测试用例/API">
@@ -10,13 +10,111 @@
 <arguments>
 <arg>devops_创建workspace</arg>
 </arguments>
-<msg timestamp="20181101 18:09:13.665" level="INFO">devops_创建workspace</msg>
-<status status="PASS" starttime="20181101 18:09:13.664" endtime="20181101 18:09:13.665"></status>
+<msg timestamp="20181102 14:53:34.137" level="INFO">devops_创建workspace</msg>
+<status status="PASS" starttime="20181102 14:53:34.137" endtime="20181102 14:53:34.138"></status>
 </kw>
 <kw name="devops_创建workspace" library="devopsAPI业务关键词">
 <arguments>
 <arg>gitlab</arg>
 </arguments>
+<kw name="github流水线获取token" library="devopsAPI基础关键词">
+<assign>
+<var>${githubjson_token}</var>
+</assign>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>base64.b64decode('${github_token}')</arg>
+<arg>modules=base64</arg>
+</arguments>
+<assign>
+<var>${kk}</var>
+</assign>
+<msg timestamp="20181102 14:53:34.140" level="INFO">${kk} = df04215030787fdb06d9517cd7f698260df933ea</msg>
+<status status="PASS" starttime="20181102 14:53:34.139" endtime="20181102 14:53:34.140"></status>
+</kw>
+<kw name="Decode Bytes To String" library="String">
+<doc>Decodes the given ``bytes`` to a Unicode string using the given ``encoding``.</doc>
+<arguments>
+<arg>${kk}</arg>
+<arg>UTF-8</arg>
+</arguments>
+<assign>
+<var>${kkstr}</var>
+</assign>
+<msg timestamp="20181102 14:53:34.141" level="INFO">${kkstr} = df04215030787fdb06d9517cd7f698260df933ea</msg>
+<status status="PASS" starttime="20181102 14:53:34.141" endtime="20181102 14:53:34.141"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${kk}</arg>
+</arguments>
+<msg timestamp="20181102 14:53:34.142" level="INFO">df04215030787fdb06d9517cd7f698260df933ea</msg>
+<status status="PASS" starttime="20181102 14:53:34.141" endtime="20181102 14:53:34.142"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>${workspaceJSON_github}</arg>
+</arguments>
+<assign>
+<var>${github_decode_token}</var>
+</assign>
+<msg timestamp="20181102 14:53:34.143" level="INFO">${github_decode_token} = {'scm': {'type': 'Github', 'authType': 'Token', 'username': ' ', 'server': 'https://github.com', 'token': 'ZGYwNDIxNTAzMDc4N2ZkYjA2ZDk1MTdjZDdmNjk4MjYwZGY5MzNlYQ=='}, 'cargo': {'projectType': 'default...</msg>
+<status status="PASS" starttime="20181102 14:53:34.142" endtime="20181102 14:53:34.143"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${github_decode_token['scm']}</arg>
+<arg>token=${kkstr}</arg>
+</arguments>
+<status status="PASS" starttime="20181102 14:53:34.143" endtime="20181102 14:53:34.144"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${github_decode_token['scm']['token']}</arg>
+</arguments>
+<msg timestamp="20181102 14:53:34.145" level="INFO">df04215030787fdb06d9517cd7f698260df933ea</msg>
+<status status="PASS" starttime="20181102 14:53:34.144" endtime="20181102 14:53:34.145"></status>
+</kw>
+<msg timestamp="20181102 14:53:34.145" level="INFO">${githubjson_token} = {'scm': {'type': 'Github', 'authType': 'Token', 'username': ' ', 'server': 'https://github.com', 'token': 'df04215030787fdb06d9517cd7f698260df933ea'}, 'cargo': {'projectType': 'default', 'name': 'defa...</msg>
+<status status="PASS" starttime="20181102 14:53:34.139" endtime="20181102 14:53:34.145"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${repo_type}'=='gitlab'</arg>
+<arg>Set Variable</arg>
+<arg>${workspaceJson_gitlab}</arg>
+<arg>ELSE IF</arg>
+<arg>'${repo_type}'=='github'</arg>
+<arg>Set Variable</arg>
+<arg>${githubjson_token}</arg>
+</arguments>
+<assign>
+<var>${workspaceJson}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${workspaceJson_gitlab}</arg>
+</arguments>
+<status status="PASS" starttime="20181102 14:53:34.146" endtime="20181102 14:53:34.147"></status>
+</kw>
+<msg timestamp="20181102 14:53:34.147" level="INFO">${workspaceJson} = {"scm":{"type":"Gitlab","authType":"Password","username":"peter","server":"http://192.168.21.100:10081","password":"1Xiaowanzi"},"cargo":{"projectType":"default","name":"default"},"workerQuota":{"cpuR...</msg>
+<status status="PASS" starttime="20181102 14:53:34.146" endtime="20181102 14:53:34.148"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${workspaceJson}</arg>
+</arguments>
+<msg timestamp="20181102 14:53:34.148" level="INFO">{"scm":{"type":"Gitlab","authType":"Password","username":"peter","server":"http://192.168.21.100:10081","password":"1Xiaowanzi"},"cargo":{"projectType":"default","name":"default"},"workerQuota":{"cpuRequests":"0.5","cpuLimits":"1","memoryRequests":"1Gi","memoryLimits":"2Gi"},"alias":"abcgitlab"}</msg>
+<status status="PASS" starttime="20181102 14:53:34.148" endtime="20181102 14:53:34.148"></status>
+</kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -27,8 +125,8 @@
 <assign>
 <var>${header}</var>
 </assign>
-<msg timestamp="20181101 18:09:13.668" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:09:13.667" endtime="20181101 18:09:13.668"></status>
+<msg timestamp="20181102 14:53:34.150" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
+<status status="PASS" starttime="20181102 14:53:34.149" endtime="20181102 14:53:34.150"></status>
 </kw>
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
@@ -37,23 +135,23 @@
 <arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
 <arg>${header}</arg>
 </arguments>
-<msg timestamp="20181101 18:09:13.670" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:09:13.669" endtime="20181101 18:09:13.670"></status>
+<msg timestamp="20181102 14:53:34.151" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20181102 14:53:34.150" endtime="20181102 14:53:34.152"></status>
 </kw>
 <kw name="Post Request" library="RequestsLibrary">
 <doc>Send a POST request on the session object found using the</doc>
 <arguments>
 <arg>compass</arg>
 <arg>/v1/workspaces</arg>
-<arg>data=${workspaceJSON_${repo_type}}</arg>
+<arg>data=${workspaceJson}</arg>
 <arg>headers=${header}</arg>
 </arguments>
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20181101 18:09:14.668" level="INFO">Post Request using : alias=compass, uri=/v1/workspaces, data={"scm":{"type":"Gitlab","authType":"Password","username":"peter","server":"http://192.168.21.100:10081","password":"1Xiaowanzi"},"cargo":{"projectType":"default","name":"default"},"workerQuota":{"cpuRequests":"0.5","cpuLimits":"1","memoryRequests":"1Gi","memoryLimits":"2Gi"},"alias":"abcgitlab"}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
-<msg timestamp="20181101 18:09:14.669" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<status status="PASS" starttime="20181101 18:09:13.671" endtime="20181101 18:09:14.669"></status>
+<msg timestamp="20181102 14:53:35.846" level="INFO">Post Request using : alias=compass, uri=/v1/workspaces, data={"scm":{"type":"Gitlab","authType":"Password","username":"peter","server":"http://192.168.21.100:10081","password":"1Xiaowanzi"},"cargo":{"projectType":"default","name":"default"},"workerQuota":{"cpuRequests":"0.5","cpuLimits":"1","memoryRequests":"1Gi","memoryLimits":"2Gi"},"alias":"abcgitlab"}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20181102 14:53:35.846" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20181102 14:53:34.152" endtime="20181102 14:53:35.847"></status>
 </kw>
 <kw name="Should Be Equal As Strings" library="BuiltIn">
 <doc>Fails if objects are unequal after converting them to strings.</doc>
@@ -61,10 +159,10 @@
 <arg>${resp.status_code}</arg>
 <arg>201</arg>
 </arguments>
-<msg timestamp="20181101 18:09:14.671" level="INFO">Argument types are:
+<msg timestamp="20181102 14:53:35.849" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:09:14.670" endtime="20181101 18:09:14.672"></status>
+<status status="PASS" starttime="20181102 14:53:35.848" endtime="20181102 14:53:35.850"></status>
 </kw>
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
@@ -74,26 +172,26 @@
 <assign>
 <var>${content}</var>
 </assign>
-<msg timestamp="20181101 18:09:14.673" level="INFO">${content} = {'name': 'abcgitlab', 'alias': 'abcgitlab', 'description': '', 'owner': 'admin', 'scm': {'type': 'Gitlab', 'authType': 'Password', 'server': 'http://192.168.21.100:10081', 'username': 'peter', 'token'...</msg>
-<status status="PASS" starttime="20181101 18:09:14.672" endtime="20181101 18:09:14.673"></status>
+<msg timestamp="20181102 14:53:35.852" level="INFO">${content} = {'name': 'abcgitlab', 'alias': 'abcgitlab', 'description': '', 'owner': 'admin', 'scm': {'type': 'Gitlab', 'authType': 'Password', 'server': 'http://192.168.21.100:10081', 'username': 'peter', 'token'...</msg>
+<status status="PASS" starttime="20181102 14:53:35.851" endtime="20181102 14:53:35.853"></status>
 </kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
 <arg>${content}</arg>
 </arguments>
-<msg timestamp="20181101 18:09:14.675" level="INFO">{'name': 'abcgitlab', 'alias': 'abcgitlab', 'description': '', 'owner': 'admin', 'scm': {'type': 'Gitlab', 'authType': 'Password', 'server': 'http://192.168.21.100:10081', 'username': 'peter', 'token': '1WWMYE9dz4WJRe+BwQphvZcnzF44dlSj7uFe+vc88gDujqSqkndJ1qTvR7onMu0ZvmG1wdGYzwnZ6OaCMjjWRbeZEJ9cY7uEgB2pxxIwwQI='}, 'pipelineCount': 0, 'cargo': {'name': 'default', 'project': 'godevops_abcgitlab', 'host': 'cargo-regression-a.caicloudprivatetest.com'}, 'cacheDependencies': None, 'workerQuota': {}, 'creationTime': '2018-11-01T18:09:14+08:00', 'lastUpdateTime': '2018-11-01T18:09:14+08:00'}</msg>
-<status status="PASS" starttime="20181101 18:09:14.674" endtime="20181101 18:09:14.675"></status>
+<msg timestamp="20181102 14:53:35.855" level="INFO">{'name': 'abcgitlab', 'alias': 'abcgitlab', 'description': '', 'owner': 'admin', 'scm': {'type': 'Gitlab', 'authType': 'Password', 'server': 'http://192.168.21.100:10081', 'username': 'peter', 'token': '7u9/1llUD9i5YVgzcb+F3xAnG+3fNO+hl4h5Nr6sde2GyR6qKolWT1ADaAeWpfQtf+h1H6wzBJpWR0HIPWYPw+lO8U9wP+yzAGe4oNtVKQ8='}, 'pipelineCount': 0, 'cargo': {'name': 'default', 'project': 'godevops_abcgitlab', 'host': 'cargo-regression-a.caicloudprivatetest.com'}, 'cacheDependencies': None, 'workerQuota': {}, 'creationTime': '2018-11-02T14:53:27+08:00', 'lastUpdateTime': '2018-11-02T14:53:27+08:00'}</msg>
+<status status="PASS" starttime="20181102 14:53:35.854" endtime="20181102 14:53:35.856"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:09:13.666" endtime="20181101 18:09:14.676"></status>
+<status status="PASS" starttime="20181102 14:53:34.138" endtime="20181102 14:53:35.857"></status>
 </kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
 <arg>devops_创建pipeline</arg>
 </arguments>
-<msg timestamp="20181101 18:09:14.677" level="INFO">devops_创建pipeline</msg>
-<status status="PASS" starttime="20181101 18:09:14.677" endtime="20181101 18:09:14.677"></status>
+<msg timestamp="20181102 14:53:35.859" level="INFO">devops_创建pipeline</msg>
+<status status="PASS" starttime="20181102 14:53:35.858" endtime="20181102 14:53:35.859"></status>
 </kw>
 <kw name="devops_创建pipeline" library="devopsAPI业务关键词">
 <arguments>
@@ -112,8 +210,8 @@
 <assign>
 <var>${header}</var>
 </assign>
-<msg timestamp="20181101 18:09:14.680" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:09:14.679" endtime="20181101 18:09:14.681"></status>
+<msg timestamp="20181102 14:53:35.862" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
+<status status="PASS" starttime="20181102 14:53:35.861" endtime="20181102 14:53:35.862"></status>
 </kw>
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
@@ -122,8 +220,8 @@
 <arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
 <arg>${header}</arg>
 </arguments>
-<msg timestamp="20181101 18:09:14.682" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:09:14.681" endtime="20181101 18:09:14.682"></status>
+<msg timestamp="20181102 14:53:35.863" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20181102 14:53:35.862" endtime="20181102 14:53:35.864"></status>
 </kw>
 <kw name="Post Request" library="RequestsLibrary">
 <doc>Send a POST request on the session object found using the</doc>
@@ -136,9 +234,9 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20181101 18:09:14.865" level="INFO">Post Request using : alias=compass, uri=v1/workspaces/abcgitlab/pipelines, data={"name":"abcgitlab","alias":"abcgitlab","description":"","build":{"buildInfo":{"buildTool":{},"cacheDependency":false},"builderImage":{"image":"cargo-regression-a.caicloudprivatetest.com/library/golang:1.9.5-alpine3.7"},"stages":{"codeCheckout":{"mainRepo":{"type":"Gitlab","gitlab":{"ref":"refs/heads/master","url":"http://192.168.21.100:10081/peter/golangtest.git"}}},"package":{"command":["cd helloworld\nCGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build"]},"imageBuild":{"buildInfos":[{"contextDir":".","dockerfile":"","dockerfilePath":"helloworld/Dockerfile","taskName":"imageBuild-be1rt","mark":"imageBuild-be1rt","imageName":"abcd"}]},"imageRelease":{"releasePolicies":[{"imageName":"abcd","type":"Always"}]}}}}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
-<msg timestamp="20181101 18:09:14.866" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<status status="PASS" starttime="20181101 18:09:14.683" endtime="20181101 18:09:14.866"></status>
+<msg timestamp="20181102 14:53:36.091" level="INFO">Post Request using : alias=compass, uri=v1/workspaces/abcgitlab/pipelines, data={"name":"abcgitlab","alias":"abcgitlab","description":"","build":{"buildInfo":{"buildTool":{},"cacheDependency":false},"builderImage":{"image":"cargo-regression-a.caicloudprivatetest.com/library/golang:1.9.5-alpine3.7"},"stages":{"codeCheckout":{"mainRepo":{"type":"Gitlab","gitlab":{"ref":"refs/heads/master","url":"http://192.168.21.100:10081/peter/golangtest.git"}}},"package":{"command":["cd helloworld\nCGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build"]},"imageBuild":{"buildInfos":[{"contextDir":".","dockerfile":"","dockerfilePath":"helloworld/Dockerfile","taskName":"imageBuild-be1rt","mark":"imageBuild-be1rt","imageName":"abcd"}]},"imageRelease":{"releasePolicies":[{"imageName":"abcd","type":"Always"}]}}}}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20181102 14:53:36.092" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20181102 14:53:35.864" endtime="20181102 14:53:36.092"></status>
 </kw>
 <kw name="Should Be Equal As Strings" library="BuiltIn">
 <doc>Fails if objects are unequal after converting them to strings.</doc>
@@ -146,10 +244,10 @@
 <arg>${resp.status_code}</arg>
 <arg>201</arg>
 </arguments>
-<msg timestamp="20181101 18:09:14.867" level="INFO">Argument types are:
+<msg timestamp="20181102 14:53:36.094" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:09:14.866" endtime="20181101 18:09:14.868"></status>
+<status status="PASS" starttime="20181102 14:53:36.093" endtime="20181102 14:53:36.094"></status>
 </kw>
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
@@ -159,26 +257,26 @@
 <assign>
 <var>${content}</var>
 </assign>
-<msg timestamp="20181101 18:09:14.870" level="INFO">${content} = {'id': '5bdad0ca16da9c0001a6ca12', 'name': 'abcgitlab', 'alias': 'abcgitlab', 'owner': 'admin', 'projectID': '5bdad0ca16da9c0001a6ca11', 'build': {'buildInfo': {'buildTool': {}}, 'builderImage': {'ima...</msg>
-<status status="PASS" starttime="20181101 18:09:14.869" endtime="20181101 18:09:14.870"></status>
+<msg timestamp="20181102 14:53:36.096" level="INFO">${content} = {'id': '5bdbf46716da9c0001a6ca1b', 'name': 'abcgitlab', 'alias': 'abcgitlab', 'owner': 'admin', 'projectID': '5bdbf46716da9c0001a6ca1a', 'build': {'buildInfo': {'buildTool': {}}, 'builderImage': {'ima...</msg>
+<status status="PASS" starttime="20181102 14:53:36.095" endtime="20181102 14:53:36.096"></status>
 </kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
 <arg>${content}</arg>
 </arguments>
-<msg timestamp="20181101 18:09:14.872" level="INFO">{'id': '5bdad0ca16da9c0001a6ca12', 'name': 'abcgitlab', 'alias': 'abcgitlab', 'owner': 'admin', 'projectID': '5bdad0ca16da9c0001a6ca11', 'build': {'buildInfo': {'buildTool': {}}, 'builderImage': {'image': 'cargo-regression-a.caicloudprivatetest.com/library/golang:1.9.5-alpine3.7'}, 'stages': {'codeCheckout': {'mainRepo': {'type': 'Gitlab', 'gitlab': {'url': 'http://192.168.21.100:10081/peter/golangtest.git', 'ref': 'refs/heads/master'}}}, 'package': {'command': ['cd helloworld\nCGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build']}, 'imageBuild': {'buildInfos': [{'taskName': 'imageBuild-be1rt', 'contextDir': '.', 'dockerfilePath': 'helloworld/Dockerfile', 'imageName': 'abcd'}]}, 'imageRelease': {'releasePolicies': [{'imageName': 'abcd', 'type': 'Always'}]}}}, 'creationTime': '2018-11-01T18:09:14.873318591+08:00', 'lastUpdateTime': '2018-11-01T18:09:14.873318767+08:00', 'annotations': {'tenant': 'godevops'}}</msg>
-<status status="PASS" starttime="20181101 18:09:14.871" endtime="20181101 18:09:14.873"></status>
+<msg timestamp="20181102 14:53:36.098" level="INFO">{'id': '5bdbf46716da9c0001a6ca1b', 'name': 'abcgitlab', 'alias': 'abcgitlab', 'owner': 'admin', 'projectID': '5bdbf46716da9c0001a6ca1a', 'build': {'buildInfo': {'buildTool': {}}, 'builderImage': {'image': 'cargo-regression-a.caicloudprivatetest.com/library/golang:1.9.5-alpine3.7'}, 'stages': {'codeCheckout': {'mainRepo': {'type': 'Gitlab', 'gitlab': {'url': 'http://192.168.21.100:10081/peter/golangtest.git', 'ref': 'refs/heads/master'}}}, 'package': {'command': ['cd helloworld\nCGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build']}, 'imageBuild': {'buildInfos': [{'taskName': 'imageBuild-be1rt', 'contextDir': '.', 'dockerfilePath': 'helloworld/Dockerfile', 'imageName': 'abcd'}]}, 'imageRelease': {'releasePolicies': [{'imageName': 'abcd', 'type': 'Always'}]}}}, 'creationTime': '2018-11-02T14:53:27.9514444+08:00', 'lastUpdateTime': '2018-11-02T14:53:27.95144457+08:00', 'annotations': {'tenant': 'godevops'}}</msg>
+<status status="PASS" starttime="20181102 14:53:36.097" endtime="20181102 14:53:36.099"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:09:14.678" endtime="20181101 18:09:14.873"></status>
+<status status="PASS" starttime="20181102 14:53:35.860" endtime="20181102 14:53:36.099"></status>
 </kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
 <arg>devops_执行pipeline</arg>
 </arguments>
-<msg timestamp="20181101 18:09:14.875" level="INFO">devops_执行pipeline</msg>
-<status status="PASS" starttime="20181101 18:09:14.874" endtime="20181101 18:09:14.875"></status>
+<msg timestamp="20181102 14:53:36.100" level="INFO">devops_执行pipeline</msg>
+<status status="PASS" starttime="20181102 14:53:36.100" endtime="20181102 14:53:36.101"></status>
 </kw>
 <kw name="devops_执行pipeline" library="devopsAPI业务关键词">
 <arguments>
@@ -196,8 +294,8 @@
 <assign>
 <var>${header}</var>
 </assign>
-<msg timestamp="20181101 18:09:14.878" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:09:14.877" endtime="20181101 18:09:14.878"></status>
+<msg timestamp="20181102 14:53:36.104" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
+<status status="PASS" starttime="20181102 14:53:36.103" endtime="20181102 14:53:36.104"></status>
 </kw>
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
@@ -206,8 +304,8 @@
 <arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
 <arg>${header}</arg>
 </arguments>
-<msg timestamp="20181101 18:09:14.880" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:09:14.879" endtime="20181101 18:09:14.881"></status>
+<msg timestamp="20181102 14:53:36.105" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20181102 14:53:36.105" endtime="20181102 14:53:36.106"></status>
 </kw>
 <kw name="Post Request" library="RequestsLibrary">
 <doc>Send a POST request on the session object found using the</doc>
@@ -220,9 +318,9 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20181101 18:09:15.193" level="INFO">Post Request using : alias=compass, uri=v1/workspaces/abcgitlab/pipelines/abcgitlab/records, data={"stages":["codeCheckout","package","imageBuild","imageRelease"],"workspace":"abcgitlab","pipeline":"abcgitlab","codeRef":{"type":"refs/heads/","name":"master"},"ref":"refs/heads/master","repoName":"caicaihe/golang","repoType":"github","tagType":"default","cacheDependency":false}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
-<msg timestamp="20181101 18:09:15.193" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<status status="PASS" starttime="20181101 18:09:14.881" endtime="20181101 18:09:15.194"></status>
+<msg timestamp="20181102 14:53:36.869" level="INFO">Post Request using : alias=compass, uri=v1/workspaces/abcgitlab/pipelines/abcgitlab/records, data={"stages":["codeCheckout","package","imageBuild","imageRelease"],"workspace":"abcgitlab","pipeline":"abcgitlab","codeRef":{"type":"refs/heads/","name":"master"},"ref":"refs/heads/master","repoName":"caicaihe/golang","repoType":"github","tagType":"default","cacheDependency":false}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20181102 14:53:36.869" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20181102 14:53:36.107" endtime="20181102 14:53:36.869"></status>
 </kw>
 <kw name="Should Be Equal As Strings" library="BuiltIn">
 <doc>Fails if objects are unequal after converting them to strings.</doc>
@@ -230,10 +328,10 @@
 <arg>${resp.status_code}</arg>
 <arg>201</arg>
 </arguments>
-<msg timestamp="20181101 18:09:15.195" level="INFO">Argument types are:
+<msg timestamp="20181102 14:53:36.871" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:09:15.194" endtime="20181101 18:09:15.196"></status>
+<status status="PASS" starttime="20181102 14:53:36.870" endtime="20181102 14:53:36.871"></status>
 </kw>
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
@@ -243,26 +341,26 @@
 <assign>
 <var>${content}</var>
 </assign>
-<msg timestamp="20181101 18:09:15.198" level="INFO">${content} = {'id': '5bdad0cb16da9c0001a6ca13', 'pipelineID': '5bdad0ca16da9c0001a6ca12', 'trigger': 'admin', 'performParams': {'ref': 'refs/heads/master', 'stages': ['codeCheckout', 'package', 'imageBuild', 'imag...</msg>
-<status status="PASS" starttime="20181101 18:09:15.197" endtime="20181101 18:09:15.198"></status>
+<msg timestamp="20181102 14:53:36.872" level="INFO">${content} = {'id': '5bdbf46816da9c0001a6ca1c', 'pipelineID': '5bdbf46716da9c0001a6ca1b', 'trigger': 'admin', 'performParams': {'ref': 'refs/heads/master', 'stages': ['codeCheckout', 'package', 'imageBuild', 'imag...</msg>
+<status status="PASS" starttime="20181102 14:53:36.871" endtime="20181102 14:53:36.872"></status>
 </kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
 <arg>${content}</arg>
 </arguments>
-<msg timestamp="20181101 18:09:15.199" level="INFO">{'id': '5bdad0cb16da9c0001a6ca13', 'pipelineID': '5bdad0ca16da9c0001a6ca12', 'trigger': 'admin', 'performParams': {'ref': 'refs/heads/master', 'stages': ['codeCheckout', 'package', 'imageBuild', 'imageRelease']}, 'status': 'Pending', 'startTime': '2018-11-01T18:09:15.139036431+08:00', 'endTime': '0001-01-01T00:00:00Z'}</msg>
-<status status="PASS" starttime="20181101 18:09:15.199" endtime="20181101 18:09:15.200"></status>
+<msg timestamp="20181102 14:53:36.873" level="INFO">{'id': '5bdbf46816da9c0001a6ca1c', 'pipelineID': '5bdbf46716da9c0001a6ca1b', 'trigger': 'admin', 'performParams': {'ref': 'refs/heads/master', 'stages': ['codeCheckout', 'package', 'imageBuild', 'imageRelease']}, 'status': 'Pending', 'startTime': '2018-11-02T14:53:28.362270808+08:00', 'endTime': '0001-01-01T00:00:00Z'}</msg>
+<status status="PASS" starttime="20181102 14:53:36.873" endtime="20181102 14:53:36.873"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:09:14.876" endtime="20181101 18:09:15.200"></status>
+<status status="PASS" starttime="20181102 14:53:36.101" endtime="20181102 14:53:36.873"></status>
 </kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
 <arg>devops_pipeline执行结果</arg>
 </arguments>
-<msg timestamp="20181101 18:09:15.202" level="INFO">devops_pipeline执行结果</msg>
-<status status="PASS" starttime="20181101 18:09:15.201" endtime="20181101 18:09:15.202"></status>
+<msg timestamp="20181102 14:53:36.874" level="INFO">devops_pipeline执行结果</msg>
+<status status="PASS" starttime="20181102 14:53:36.874" endtime="20181102 14:53:36.874"></status>
 </kw>
 <kw name="devops_pipeline执行结果_流水线执行完毕" library="devopsAPI业务关键词">
 <arguments>
@@ -280,8 +378,8 @@
 <arguments>
 <arg>60</arg>
 </arguments>
-<msg timestamp="20181101 18:10:15.209" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:09:15.207" endtime="20181101 18:10:15.209"></status>
+<msg timestamp="20181102 14:54:36.878" level="INFO">Slept 1 minute</msg>
+<status status="PASS" starttime="20181102 14:53:36.876" endtime="20181102 14:54:36.879"></status>
 </kw>
 <kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
 <arguments>
@@ -302,8 +400,8 @@
 <assign>
 <var>${header}</var>
 </assign>
-<msg timestamp="20181101 18:10:15.214" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:10:15.212" endtime="20181101 18:10:15.214"></status>
+<msg timestamp="20181102 14:54:36.883" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
+<status status="PASS" starttime="20181102 14:54:36.881" endtime="20181102 14:54:36.883"></status>
 </kw>
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
@@ -312,8 +410,8 @@
 <arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
 <arg>${header}</arg>
 </arguments>
-<msg timestamp="20181101 18:10:15.216" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:10:15.215" endtime="20181101 18:10:15.217"></status>
+<msg timestamp="20181102 14:54:36.885" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20181102 14:54:36.883" endtime="20181102 14:54:36.886"></status>
 </kw>
 <kw name="Get Request" library="RequestsLibrary">
 <doc>Send a GET request on the session object found using the</doc>
@@ -325,9 +423,9 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20181101 18:10:15.527" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgitlab/pipelines/abcgitlab/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:10:15.527" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:10:15.217" endtime="20181101 18:10:15.528"></status>
+<msg timestamp="20181102 14:54:37.178" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgitlab/pipelines/abcgitlab/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
+<msg timestamp="20181102 14:54:37.178" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20181102 14:54:36.887" endtime="20181102 14:54:37.179"></status>
 </kw>
 <kw name="Should Be Equal As Strings" library="BuiltIn">
 <doc>Fails if objects are unequal after converting them to strings.</doc>
@@ -335,10 +433,10 @@
 <arg>${resp.status_code}</arg>
 <arg>200</arg>
 </arguments>
-<msg timestamp="20181101 18:10:15.529" level="INFO">Argument types are:
+<msg timestamp="20181102 14:54:37.181" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:10:15.528" endtime="20181101 18:10:15.530"></status>
+<status status="PASS" starttime="20181102 14:54:37.180" endtime="20181102 14:54:37.182"></status>
 </kw>
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
@@ -348,8 +446,8 @@
 <assign>
 <var>${content}</var>
 </assign>
-<msg timestamp="20181101 18:10:15.532" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad0cb16da9c0001a6ca13', 'name': 'dcf36b7-181101180922', 'pipelineID': '5bdad0ca16da9c0001a6ca12', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:10:15.530" endtime="20181101 18:10:15.532"></status>
+<msg timestamp="20181102 14:54:37.185" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdbf46816da9c0001a6ca1c', 'name': 'dcf36b7-181102145336', 'pipelineID': '5bdbf46716da9c0001a6ca1b', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
+<status status="PASS" starttime="20181102 14:54:37.183" endtime="20181102 14:54:37.185"></status>
 </kw>
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
@@ -359,11 +457,11 @@
 <assign>
 <var>${result}</var>
 </assign>
-<msg timestamp="20181101 18:10:15.534" level="INFO">${result} = Running</msg>
-<status status="PASS" starttime="20181101 18:10:15.533" endtime="20181101 18:10:15.534"></status>
+<msg timestamp="20181102 14:54:37.187" level="INFO">${result} = Running</msg>
+<status status="PASS" starttime="20181102 14:54:37.186" endtime="20181102 14:54:37.187"></status>
 </kw>
-<msg timestamp="20181101 18:10:15.535" level="INFO">${return} = Running</msg>
-<status status="PASS" starttime="20181101 18:10:15.210" endtime="20181101 18:10:15.535"></status>
+<msg timestamp="20181102 14:54:37.188" level="INFO">${return} = Running</msg>
+<status status="PASS" starttime="20181102 14:54:36.879" endtime="20181102 14:54:37.189"></status>
 </kw>
 <kw name="Run Keyword If" library="BuiltIn">
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
@@ -371,7 +469,7 @@
 <arg>'${return}'=='Success'</arg>
 <arg>Exit For Loop</arg>
 </arguments>
-<status status="PASS" starttime="20181101 18:10:15.536" endtime="20181101 18:10:15.537"></status>
+<status status="PASS" starttime="20181102 14:54:37.190" endtime="20181102 14:54:37.191"></status>
 </kw>
 <kw name="Run Keyword If" library="BuiltIn">
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
@@ -379,9 +477,9 @@
 <arg>'${return}'=='Failed'</arg>
 <arg>Exit For Loop</arg>
 </arguments>
-<status status="PASS" starttime="20181101 18:10:15.538" endtime="20181101 18:10:15.539"></status>
+<status status="PASS" starttime="20181102 14:54:37.192" endtime="20181102 14:54:37.193"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:09:15.207" endtime="20181101 18:10:15.539"></status>
+<status status="PASS" starttime="20181102 14:53:36.875" endtime="20181102 14:54:37.193"></status>
 </kw>
 <kw name="${i} = 1" type="foritem">
 <kw name="Sleep" library="BuiltIn">
@@ -389,8 +487,8 @@
 <arguments>
 <arg>60</arg>
 </arguments>
-<msg timestamp="20181101 18:11:15.541" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:10:15.540" endtime="20181101 18:11:15.542"></status>
+<msg timestamp="20181102 14:55:37.195" level="INFO">Slept 1 minute</msg>
+<status status="PASS" starttime="20181102 14:54:37.194" endtime="20181102 14:55:37.196"></status>
 </kw>
 <kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
 <arguments>
@@ -411,8 +509,8 @@
 <assign>
 <var>${header}</var>
 </assign>
-<msg timestamp="20181101 18:11:15.546" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:11:15.545" endtime="20181101 18:11:15.546"></status>
+<msg timestamp="20181102 14:55:37.198" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
+<status status="PASS" starttime="20181102 14:55:37.198" endtime="20181102 14:55:37.198"></status>
 </kw>
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
@@ -421,8 +519,8 @@
 <arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
 <arg>${header}</arg>
 </arguments>
-<msg timestamp="20181101 18:11:15.548" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:11:15.547" endtime="20181101 18:11:15.549"></status>
+<msg timestamp="20181102 14:55:37.199" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20181102 14:55:37.199" endtime="20181102 14:55:37.200"></status>
 </kw>
 <kw name="Get Request" library="RequestsLibrary">
 <doc>Send a GET request on the session object found using the</doc>
@@ -434,9 +532,9 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20181101 18:11:15.837" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgitlab/pipelines/abcgitlab/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:11:15.837" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:15.549" endtime="20181101 18:11:15.838"></status>
+<msg timestamp="20181102 14:55:37.468" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgitlab/pipelines/abcgitlab/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
+<msg timestamp="20181102 14:55:37.469" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20181102 14:55:37.200" endtime="20181102 14:55:37.470"></status>
 </kw>
 <kw name="Should Be Equal As Strings" library="BuiltIn">
 <doc>Fails if objects are unequal after converting them to strings.</doc>
@@ -444,10 +542,10 @@
 <arg>${resp.status_code}</arg>
 <arg>200</arg>
 </arguments>
-<msg timestamp="20181101 18:11:15.840" level="INFO">Argument types are:
+<msg timestamp="20181102 14:55:37.472" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:15.839" endtime="20181101 18:11:15.841"></status>
+<status status="PASS" starttime="20181102 14:55:37.470" endtime="20181102 14:55:37.472"></status>
 </kw>
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
@@ -457,8 +555,8 @@
 <assign>
 <var>${content}</var>
 </assign>
-<msg timestamp="20181101 18:11:15.844" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad0cb16da9c0001a6ca13', 'name': 'dcf36b7-181101180922', 'pipelineID': '5bdad0ca16da9c0001a6ca12', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:11:15.842" endtime="20181101 18:11:15.844"></status>
+<msg timestamp="20181102 14:55:37.476" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdbf46816da9c0001a6ca1c', 'name': 'dcf36b7-181102145336', 'pipelineID': '5bdbf46716da9c0001a6ca1b', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
+<status status="PASS" starttime="20181102 14:55:37.473" endtime="20181102 14:55:37.476"></status>
 </kw>
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
@@ -468,11 +566,11 @@
 <assign>
 <var>${result}</var>
 </assign>
-<msg timestamp="20181101 18:11:15.847" level="INFO">${result} = Success</msg>
-<status status="PASS" starttime="20181101 18:11:15.845" endtime="20181101 18:11:15.847"></status>
+<msg timestamp="20181102 14:55:37.479" level="INFO">${result} = Success</msg>
+<status status="PASS" starttime="20181102 14:55:37.477" endtime="20181102 14:55:37.479"></status>
 </kw>
-<msg timestamp="20181101 18:11:15.849" level="INFO">${return} = Success</msg>
-<status status="PASS" starttime="20181101 18:11:15.543" endtime="20181101 18:11:15.849"></status>
+<msg timestamp="20181102 14:55:37.480" level="INFO">${return} = Success</msg>
+<status status="PASS" starttime="20181102 14:55:37.197" endtime="20181102 14:55:37.480"></status>
 </kw>
 <kw name="Run Keyword If" library="BuiltIn">
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
@@ -482,25 +580,25 @@
 </arguments>
 <kw name="Exit For Loop" library="BuiltIn">
 <doc>Stops executing the enclosing for loop.</doc>
-<msg timestamp="20181101 18:11:15.852" level="INFO">Exiting for loop altogether.</msg>
-<status status="PASS" starttime="20181101 18:11:15.851" endtime="20181101 18:11:15.853"></status>
+<msg timestamp="20181102 14:55:37.482" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20181102 14:55:37.482" endtime="20181102 14:55:37.483"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:11:15.850" endtime="20181101 18:11:15.853"></status>
+<status status="PASS" starttime="20181102 14:55:37.481" endtime="20181102 14:55:37.484"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:10:15.539" endtime="20181101 18:11:15.853"></status>
+<status status="PASS" starttime="20181102 14:54:37.194" endtime="20181102 14:55:37.484"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:09:15.206" endtime="20181101 18:11:15.854"></status>
+<status status="PASS" starttime="20181102 14:53:36.875" endtime="20181102 14:55:37.485"></status>
 </kw>
-<msg timestamp="20181101 18:11:15.855" level="INFO">${return} = Success</msg>
-<status status="PASS" starttime="20181101 18:09:15.203" endtime="20181101 18:11:15.855"></status>
+<msg timestamp="20181102 14:55:37.485" level="INFO">${return} = Success</msg>
+<status status="PASS" starttime="20181102 14:53:36.874" endtime="20181102 14:55:37.485"></status>
 </kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
 <arg>断言执行结果为success</arg>
 </arguments>
-<msg timestamp="20181101 18:11:15.857" level="INFO">断言执行结果为success</msg>
-<status status="PASS" starttime="20181101 18:11:15.856" endtime="20181101 18:11:15.858"></status>
+<msg timestamp="20181102 14:55:37.486" level="INFO">断言执行结果为success</msg>
+<status status="PASS" starttime="20181102 14:55:37.486" endtime="20181102 14:55:37.487"></status>
 </kw>
 <kw name="Run Keyword And Continue On Failure" library="BuiltIn">
 <doc>Runs the keyword and continues execution even if a failure occurs.</doc>
@@ -515,17 +613,17 @@
 <arg>'${return}'</arg>
 <arg>'Success'</arg>
 </arguments>
-<status status="PASS" starttime="20181101 18:11:15.860" endtime="20181101 18:11:15.861"></status>
+<status status="PASS" starttime="20181102 14:55:37.488" endtime="20181102 14:55:37.489"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:11:15.859" endtime="20181101 18:11:15.861"></status>
+<status status="PASS" starttime="20181102 14:55:37.487" endtime="20181102 14:55:37.489"></status>
 </kw>
 <kw name="Log" library="BuiltIn">
 <doc>Logs the given message with the given level.</doc>
 <arguments>
 <arg>删除流水线组</arg>
 </arguments>
-<msg timestamp="20181101 18:11:15.862" level="INFO">删除流水线组</msg>
-<status status="PASS" starttime="20181101 18:11:15.862" endtime="20181101 18:11:15.862"></status>
+<msg timestamp="20181102 14:55:37.492" level="INFO">删除流水线组</msg>
+<status status="PASS" starttime="20181102 14:55:37.490" endtime="20181102 14:55:37.492"></status>
 </kw>
 <kw name="devops_删除workspace" library="devopsAPI业务关键词">
 <arguments>
@@ -542,8 +640,8 @@
 <assign>
 <var>${header}</var>
 </assign>
-<msg timestamp="20181101 18:11:15.864" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:11:15.864" endtime="20181101 18:11:15.865"></status>
+<msg timestamp="20181102 14:55:37.495" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
+<status status="PASS" starttime="20181102 14:55:37.493" endtime="20181102 14:55:37.496"></status>
 </kw>
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
@@ -552,8 +650,8 @@
 <arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
 <arg>${header}</arg>
 </arguments>
-<msg timestamp="20181101 18:11:15.865" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:11:15.865" endtime="20181101 18:11:15.866"></status>
+<msg timestamp="20181102 14:55:37.497" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20181102 14:55:37.496" endtime="20181102 14:55:37.497"></status>
 </kw>
 <kw name="Delete Request" library="RequestsLibrary">
 <doc>Send a DELETE request on the session object found using the</doc>
@@ -565,9 +663,9 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20181101 18:11:16.522" level="INFO">Delete Request using : alias=compass, uri=/v1/workspaces/abcgitlab, data=[],                     headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, allow_redirects=True </msg>
-<msg timestamp="20181101 18:11:16.524" level="INFO">${resp} = &lt;Response [204]&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:15.867" endtime="20181101 18:11:16.524"></status>
+<msg timestamp="20181102 14:55:37.912" level="INFO">Delete Request using : alias=compass, uri=/v1/workspaces/abcgitlab, data=[],                     headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, allow_redirects=True </msg>
+<msg timestamp="20181102 14:55:37.913" level="INFO">${resp} = &lt;Response [204]&gt;</msg>
+<status status="PASS" starttime="20181102 14:55:37.498" endtime="20181102 14:55:37.914"></status>
 </kw>
 <kw name="Should Be Equal As Strings" library="BuiltIn">
 <doc>Fails if objects are unequal after converting them to strings.</doc>
@@ -575,1270 +673,35 @@
 <arg>${resp.status_code}</arg>
 <arg>204</arg>
 </arguments>
-<msg timestamp="20181101 18:11:16.527" level="INFO">Argument types are:
+<msg timestamp="20181102 14:55:37.916" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:16.525" endtime="20181101 18:11:16.527"></status>
+<status status="PASS" starttime="20181102 14:55:37.915" endtime="20181102 14:55:37.917"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:11:15.863" endtime="20181101 18:11:16.528"></status>
+<status status="PASS" starttime="20181102 14:55:37.493" endtime="20181102 14:55:37.918"></status>
 </kw>
-<status status="PASS" starttime="20181101 18:09:13.661" endtime="20181101 18:11:16.529" critical="yes"></status>
+<status status="PASS" starttime="20181102 14:53:34.135" endtime="20181102 14:55:37.919" critical="yes"></status>
 </test>
-<test id="s1-s1-s1-s1-t2" name="devops_持续交付_github_maven流水线">
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>devops_创建workspace</arg>
-</arguments>
-<msg timestamp="20181101 18:11:16.534" level="INFO">devops_创建workspace</msg>
-<status status="PASS" starttime="20181101 18:11:16.533" endtime="20181101 18:11:16.534"></status>
-</kw>
-<kw name="devops_创建workspace" library="devopsAPI业务关键词">
-<arguments>
-<arg>github</arg>
-<arg>${workspaceName_github}</arg>
-</arguments>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:11:16.537" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:11:16.536" endtime="20181101 18:11:16.537"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:11:16.539" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:11:16.538" endtime="20181101 18:11:16.541"></status>
-</kw>
-<kw name="Post Request" library="RequestsLibrary">
-<doc>Send a POST request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>/v1/workspaces</arg>
-<arg>data=${workspaceJSON_${repo_type}}</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:11:18.571" level="INFO">Post Request using : alias=compass, uri=/v1/workspaces, data={"scm":{"type":"Github","authType":"Token","username":" ","server":"https://github.com","token":"116aa522fa124663cf7444ebdfb403905876cd9a"},"cargo":{"projectType":"default","name":"default"},"GithubToken":"false","GithubPassword":"false","GitlabToken":"false","GitlabPassword":"false","workerQuota":{"cpuRequests":"0.5","cpuLimits":"1","memoryRequests":"1Gi","memoryLimits":"2Gi"},"alias":"abcgithub"}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
-<msg timestamp="20181101 18:11:18.576" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:16.541" endtime="20181101 18:11:18.576"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>201</arg>
-</arguments>
-<msg timestamp="20181101 18:11:18.578" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:18.577" endtime="20181101 18:11:18.579"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:11:18.581" level="INFO">${content} = {'name': 'abcgithub', 'alias': 'abcgithub', 'description': '', 'owner': 'admin', 'scm': {'type': 'Github', 'authType': 'Token', 'server': 'https://github.com', 'username': ' ', 'token': 'DFY9eCzfqOlER...</msg>
-<status status="PASS" starttime="20181101 18:11:18.579" endtime="20181101 18:11:18.581"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${content}</arg>
-</arguments>
-<msg timestamp="20181101 18:11:18.582" level="INFO">{'name': 'abcgithub', 'alias': 'abcgithub', 'description': '', 'owner': 'admin', 'scm': {'type': 'Github', 'authType': 'Token', 'server': 'https://github.com', 'username': ' ', 'token': 'DFY9eCzfqOlERuofoefmyciqdxRcUPLHyLqtfMTk0cumpIA6b/UFX1EZz/g9G7esRxyNRvQ5MAU='}, 'pipelineCount': 0, 'cargo': {'name': 'default', 'project': 'godevops_abcgithub', 'host': 'cargo-regression-a.caicloudprivatetest.com'}, 'cacheDependencies': None, 'workerQuota': {}, 'creationTime': '2018-11-01T18:11:18+08:00', 'lastUpdateTime': '2018-11-01T18:11:18+08:00'}</msg>
-<status status="PASS" starttime="20181101 18:11:18.581" endtime="20181101 18:11:18.583"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:11:16.535" endtime="20181101 18:11:18.584"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>devops_创建pipeline</arg>
-</arguments>
-<msg timestamp="20181101 18:11:18.585" level="INFO">devops_创建pipeline</msg>
-<status status="PASS" starttime="20181101 18:11:18.585" endtime="20181101 18:11:18.586"></status>
-</kw>
-<kw name="devops_创建pipeline" library="devopsAPI业务关键词">
-<arguments>
-<arg>github</arg>
-<arg>maven</arg>
-<arg>${workspaceName_github}</arg>
-<arg>${pipelineName_github}</arg>
-</arguments>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:11:18.588" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:11:18.587" endtime="20181101 18:11:18.588"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:11:18.589" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:11:18.589" endtime="20181101 18:11:18.590"></status>
-</kw>
-<kw name="Post Request" library="RequestsLibrary">
-<doc>Send a POST request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines</arg>
-<arg>data=${pipelineJSON_${repo_type}_${codeSource}}</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:11:18.834" level="INFO">Post Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines, data={"name":"abcgithub","alias":"abcgithub","description":"","build":{"buildInfo":{"buildTool":{},"cacheDependency":false},"builderImage":{"image":"cargo-regression-a.caicloudprivatetest.com/library/maven:3.5.3-jdk-8-alpine"},"stages":{"codeCheckout":{"mainRepo":{"type":"Github","github":{"ref":"refs/heads/master","url":"https://github.com/caicaihe/maventest.git"}}},"package":{"command":["mvn clean install"]},"imageBuild":{"buildInfos":[{"contextDir":".","dockerfile":"","dockerfilePath":"Dockerfile","taskName":"imageBuild-be1rt","mark":"imageBuild-be1rt","imageName":"abc"}]},"imageRelease":{"releasePolicies":[{"imageName":"bac","type":"Always"}]}}}}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
-<msg timestamp="20181101 18:11:18.834" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:18.590" endtime="20181101 18:11:18.835"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>201</arg>
-</arguments>
-<msg timestamp="20181101 18:11:18.836" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:18.835" endtime="20181101 18:11:18.837"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:11:18.839" level="INFO">${content} = {'id': '5bdad14616da9c0001a6ca15', 'name': 'abcgithub', 'alias': 'abcgithub', 'owner': 'admin', 'projectID': '5bdad14616da9c0001a6ca14', 'build': {'buildInfo': {'buildTool': {}}, 'builderImage': {'ima...</msg>
-<status status="PASS" starttime="20181101 18:11:18.837" endtime="20181101 18:11:18.839"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${content}</arg>
-</arguments>
-<msg timestamp="20181101 18:11:18.841" level="INFO">{'id': '5bdad14616da9c0001a6ca15', 'name': 'abcgithub', 'alias': 'abcgithub', 'owner': 'admin', 'projectID': '5bdad14616da9c0001a6ca14', 'build': {'buildInfo': {'buildTool': {}}, 'builderImage': {'image': 'cargo-regression-a.caicloudprivatetest.com/library/maven:3.5.3-jdk-8-alpine'}, 'stages': {'codeCheckout': {'mainRepo': {'type': 'Github', 'github': {'url': 'https://github.com/caicaihe/maventest.git', 'ref': 'refs/heads/master'}}}, 'package': {'command': ['mvn clean install']}, 'imageBuild': {'buildInfos': [{'taskName': 'imageBuild-be1rt', 'contextDir': '.', 'dockerfilePath': 'Dockerfile', 'imageName': 'abc'}]}, 'imageRelease': {'releasePolicies': [{'imageName': 'bac', 'type': 'Always'}]}}}, 'creationTime': '2018-11-01T18:11:18.843369025+08:00', 'lastUpdateTime': '2018-11-01T18:11:18.843369199+08:00', 'annotations': {'tenant': 'godevops'}}</msg>
-<status status="PASS" starttime="20181101 18:11:18.840" endtime="20181101 18:11:18.842"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:11:18.586" endtime="20181101 18:11:18.842"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>devops_执行pipeline</arg>
-</arguments>
-<msg timestamp="20181101 18:11:18.844" level="INFO">devops_执行pipeline</msg>
-<status status="PASS" starttime="20181101 18:11:18.843" endtime="20181101 18:11:18.844"></status>
-</kw>
-<kw name="devops_执行pipeline" library="devopsAPI业务关键词">
-<arguments>
-<arg>github</arg>
-<arg>${workspaceName_github}</arg>
-<arg>${pipelineName_github}</arg>
-</arguments>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:11:18.847" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:11:18.846" endtime="20181101 18:11:18.847"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:11:18.848" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:11:18.847" endtime="20181101 18:11:18.849"></status>
-</kw>
-<kw name="Post Request" library="RequestsLibrary">
-<doc>Send a POST request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>data=${recordJSON_${repo_type}}</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:11:20.004" level="INFO">Post Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, data={"stages":["codeCheckout","package","imageBuild","imageRelease"],"workspace":"abcgithub","pipeline":"abcgithub","codeRef":{"type":"refs/heads/","name":"master"},"ref":"refs/heads/master","repoName":"caicaihe/golang","repoType":"github","tagType":"default","cacheDependency":false}, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, files=None, allow_redirects=True </msg>
-<msg timestamp="20181101 18:11:20.005" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:18.849" endtime="20181101 18:11:20.005"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>201</arg>
-</arguments>
-<msg timestamp="20181101 18:11:20.008" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:11:20.006" endtime="20181101 18:11:20.008"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:11:20.010" level="INFO">${content} = {'id': '5bdad14716da9c0001a6ca16', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/heads/master', 'stages': ['codeCheckout', 'package', 'imageBuild', 'imag...</msg>
-<status status="PASS" starttime="20181101 18:11:20.009" endtime="20181101 18:11:20.010"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${content}</arg>
-</arguments>
-<msg timestamp="20181101 18:11:20.011" level="INFO">{'id': '5bdad14716da9c0001a6ca16', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/heads/master', 'stages': ['codeCheckout', 'package', 'imageBuild', 'imageRelease']}, 'status': 'Pending', 'startTime': '2018-11-01T18:11:19.130562383+08:00', 'endTime': '0001-01-01T00:00:00Z'}</msg>
-<status status="PASS" starttime="20181101 18:11:20.011" endtime="20181101 18:11:20.012"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:11:18.845" endtime="20181101 18:11:20.012"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>devops_pipeline执行结果</arg>
-</arguments>
-<msg timestamp="20181101 18:11:20.014" level="INFO">devops_pipeline执行结果</msg>
-<status status="PASS" starttime="20181101 18:11:20.013" endtime="20181101 18:11:20.014"></status>
-</kw>
-<kw name="devops_pipeline执行结果_流水线执行完毕" library="devopsAPI业务关键词">
-<arguments>
-<arg>github</arg>
-<arg>${workspaceName_github}</arg>
-<arg>${pipelineName_github}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="${i} IN RANGE [ 100 ]" type="for">
-<kw name="${i} = 0" type="foritem">
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>60</arg>
-</arguments>
-<msg timestamp="20181101 18:12:20.019" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:11:20.017" endtime="20181101 18:12:20.019"></status>
-</kw>
-<kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
-<arguments>
-<arg>${repo_type}</arg>
-<arg>${workspace}</arg>
-<arg>${pipeline}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:12:20.023" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:12:20.022" endtime="20181101 18:12:20.023"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:12:20.025" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:12:20.024" endtime="20181101 18:12:20.026"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:12:20.335" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:12:20.336" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:12:20.027" endtime="20181101 18:12:20.336"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20181101 18:12:20.338" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:12:20.337" endtime="20181101 18:12:20.338"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:12:20.340" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad14716da9c0001a6ca16', 'name': '285a131-181101181127', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:12:20.339" endtime="20181101 18:12:20.340"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${content['items'][0]['status']}</arg>
-</arguments>
-<assign>
-<var>${result}</var>
-</assign>
-<msg timestamp="20181101 18:12:20.342" level="INFO">${result} = Running</msg>
-<status status="PASS" starttime="20181101 18:12:20.341" endtime="20181101 18:12:20.343"></status>
-</kw>
-<msg timestamp="20181101 18:12:20.343" level="INFO">${return} = Running</msg>
-<status status="PASS" starttime="20181101 18:12:20.020" endtime="20181101 18:12:20.344"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Success'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:12:20.344" endtime="20181101 18:12:20.345"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Failed'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:12:20.346" endtime="20181101 18:12:20.347"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:11:20.016" endtime="20181101 18:12:20.347"></status>
-</kw>
-<kw name="${i} = 1" type="foritem">
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>60</arg>
-</arguments>
-<msg timestamp="20181101 18:13:20.350" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:12:20.348" endtime="20181101 18:13:20.351"></status>
-</kw>
-<kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
-<arguments>
-<arg>${repo_type}</arg>
-<arg>${workspace}</arg>
-<arg>${pipeline}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:13:20.355" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:13:20.354" endtime="20181101 18:13:20.356"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:13:20.357" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:13:20.356" endtime="20181101 18:13:20.358"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:13:20.767" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:13:20.768" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:13:20.358" endtime="20181101 18:13:20.769"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20181101 18:13:20.771" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:13:20.769" endtime="20181101 18:13:20.771"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:13:20.773" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad14716da9c0001a6ca16', 'name': '285a131-181101181127', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:13:20.772" endtime="20181101 18:13:20.773"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${content['items'][0]['status']}</arg>
-</arguments>
-<assign>
-<var>${result}</var>
-</assign>
-<msg timestamp="20181101 18:13:20.775" level="INFO">${result} = Running</msg>
-<status status="PASS" starttime="20181101 18:13:20.774" endtime="20181101 18:13:20.775"></status>
-</kw>
-<msg timestamp="20181101 18:13:20.776" level="INFO">${return} = Running</msg>
-<status status="PASS" starttime="20181101 18:13:20.352" endtime="20181101 18:13:20.776"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Success'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:13:20.777" endtime="20181101 18:13:20.778"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Failed'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:13:20.780" endtime="20181101 18:13:20.781"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:12:20.348" endtime="20181101 18:13:20.781"></status>
-</kw>
-<kw name="${i} = 2" type="foritem">
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>60</arg>
-</arguments>
-<msg timestamp="20181101 18:14:20.783" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:13:20.782" endtime="20181101 18:14:20.783"></status>
-</kw>
-<kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
-<arguments>
-<arg>${repo_type}</arg>
-<arg>${workspace}</arg>
-<arg>${pipeline}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:14:20.791" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:14:20.786" endtime="20181101 18:14:20.792"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:14:20.794" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:14:20.793" endtime="20181101 18:14:20.796"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:14:21.024" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:14:21.025" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:14:20.797" endtime="20181101 18:14:21.025"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20181101 18:14:21.027" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:14:21.026" endtime="20181101 18:14:21.027"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:14:21.030" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad14716da9c0001a6ca16', 'name': '285a131-181101181127', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:14:21.028" endtime="20181101 18:14:21.031"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${content['items'][0]['status']}</arg>
-</arguments>
-<assign>
-<var>${result}</var>
-</assign>
-<msg timestamp="20181101 18:14:21.032" level="INFO">${result} = Running</msg>
-<status status="PASS" starttime="20181101 18:14:21.031" endtime="20181101 18:14:21.033"></status>
-</kw>
-<msg timestamp="20181101 18:14:21.033" level="INFO">${return} = Running</msg>
-<status status="PASS" starttime="20181101 18:14:20.784" endtime="20181101 18:14:21.034"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Success'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:14:21.034" endtime="20181101 18:14:21.035"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Failed'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:14:21.036" endtime="20181101 18:14:21.036"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:13:20.781" endtime="20181101 18:14:21.037"></status>
-</kw>
-<kw name="${i} = 3" type="foritem">
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>60</arg>
-</arguments>
-<msg timestamp="20181101 18:15:21.040" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:14:21.038" endtime="20181101 18:15:21.041"></status>
-</kw>
-<kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
-<arguments>
-<arg>${repo_type}</arg>
-<arg>${workspace}</arg>
-<arg>${pipeline}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:15:21.045" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:15:21.043" endtime="20181101 18:15:21.045"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:15:21.047" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:15:21.046" endtime="20181101 18:15:21.049"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:15:21.332" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:15:21.333" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:15:21.050" endtime="20181101 18:15:21.333"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20181101 18:15:21.334" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:15:21.333" endtime="20181101 18:15:21.334"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:15:21.335" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad14716da9c0001a6ca16', 'name': '285a131-181101181127', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:15:21.335" endtime="20181101 18:15:21.335"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${content['items'][0]['status']}</arg>
-</arguments>
-<assign>
-<var>${result}</var>
-</assign>
-<msg timestamp="20181101 18:15:21.336" level="INFO">${result} = Running</msg>
-<status status="PASS" starttime="20181101 18:15:21.336" endtime="20181101 18:15:21.338"></status>
-</kw>
-<msg timestamp="20181101 18:15:21.339" level="INFO">${return} = Running</msg>
-<status status="PASS" starttime="20181101 18:15:21.042" endtime="20181101 18:15:21.339"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Success'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:15:21.340" endtime="20181101 18:15:21.340"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Failed'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:15:21.341" endtime="20181101 18:15:21.341"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:14:21.037" endtime="20181101 18:15:21.341"></status>
-</kw>
-<kw name="${i} = 4" type="foritem">
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>60</arg>
-</arguments>
-<msg timestamp="20181101 18:16:21.343" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:15:21.342" endtime="20181101 18:16:21.344"></status>
-</kw>
-<kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
-<arguments>
-<arg>${repo_type}</arg>
-<arg>${workspace}</arg>
-<arg>${pipeline}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:16:21.348" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:16:21.347" endtime="20181101 18:16:21.349"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:16:21.350" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:16:21.349" endtime="20181101 18:16:21.351"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:16:21.675" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:16:21.676" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:16:21.352" endtime="20181101 18:16:21.676"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20181101 18:16:21.677" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:16:21.676" endtime="20181101 18:16:21.678"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:16:21.679" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad14716da9c0001a6ca16', 'name': '285a131-181101181127', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:16:21.678" endtime="20181101 18:16:21.680"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${content['items'][0]['status']}</arg>
-</arguments>
-<assign>
-<var>${result}</var>
-</assign>
-<msg timestamp="20181101 18:16:21.682" level="INFO">${result} = Running</msg>
-<status status="PASS" starttime="20181101 18:16:21.681" endtime="20181101 18:16:21.683"></status>
-</kw>
-<msg timestamp="20181101 18:16:21.684" level="INFO">${return} = Running</msg>
-<status status="PASS" starttime="20181101 18:16:21.344" endtime="20181101 18:16:21.684"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Success'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:16:21.685" endtime="20181101 18:16:21.686"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Failed'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:16:21.686" endtime="20181101 18:16:21.687"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:15:21.342" endtime="20181101 18:16:21.688"></status>
-</kw>
-<kw name="${i} = 5" type="foritem">
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>60</arg>
-</arguments>
-<msg timestamp="20181101 18:17:21.690" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:16:21.688" endtime="20181101 18:17:21.691"></status>
-</kw>
-<kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
-<arguments>
-<arg>${repo_type}</arg>
-<arg>${workspace}</arg>
-<arg>${pipeline}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:17:21.696" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:17:21.694" endtime="20181101 18:17:21.696"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:17:21.699" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:17:21.697" endtime="20181101 18:17:21.700"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:17:21.953" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:17:21.954" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:17:21.701" endtime="20181101 18:17:21.954"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20181101 18:17:21.955" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:17:21.955" endtime="20181101 18:17:21.956"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:17:21.958" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad14716da9c0001a6ca16', 'name': '285a131-181101181127', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:17:21.956" endtime="20181101 18:17:21.958"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${content['items'][0]['status']}</arg>
-</arguments>
-<assign>
-<var>${result}</var>
-</assign>
-<msg timestamp="20181101 18:17:21.960" level="INFO">${result} = Running</msg>
-<status status="PASS" starttime="20181101 18:17:21.959" endtime="20181101 18:17:21.960"></status>
-</kw>
-<msg timestamp="20181101 18:17:21.961" level="INFO">${return} = Running</msg>
-<status status="PASS" starttime="20181101 18:17:21.692" endtime="20181101 18:17:21.962"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Success'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:17:21.962" endtime="20181101 18:17:21.963"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Failed'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:17:21.964" endtime="20181101 18:17:21.964"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:16:21.688" endtime="20181101 18:17:21.965"></status>
-</kw>
-<kw name="${i} = 6" type="foritem">
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>60</arg>
-</arguments>
-<msg timestamp="20181101 18:18:21.967" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:17:21.965" endtime="20181101 18:18:21.968"></status>
-</kw>
-<kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
-<arguments>
-<arg>${repo_type}</arg>
-<arg>${workspace}</arg>
-<arg>${pipeline}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:18:21.972" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:18:21.971" endtime="20181101 18:18:21.972"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:18:21.974" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:18:21.973" endtime="20181101 18:18:21.975"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:18:22.321" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:18:22.322" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:18:21.976" endtime="20181101 18:18:22.322"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20181101 18:18:22.324" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:18:22.323" endtime="20181101 18:18:22.325"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:18:22.326" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad14716da9c0001a6ca16', 'name': '285a131-181101181127', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:18:22.325" endtime="20181101 18:18:22.327"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${content['items'][0]['status']}</arg>
-</arguments>
-<assign>
-<var>${result}</var>
-</assign>
-<msg timestamp="20181101 18:18:22.328" level="INFO">${result} = Running</msg>
-<status status="PASS" starttime="20181101 18:18:22.327" endtime="20181101 18:18:22.329"></status>
-</kw>
-<msg timestamp="20181101 18:18:22.330" level="INFO">${return} = Running</msg>
-<status status="PASS" starttime="20181101 18:18:21.969" endtime="20181101 18:18:22.330"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Success'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:18:22.331" endtime="20181101 18:18:22.332"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Failed'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:18:22.332" endtime="20181101 18:18:22.333"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:17:21.965" endtime="20181101 18:18:22.333"></status>
-</kw>
-<kw name="${i} = 7" type="foritem">
-<kw name="Sleep" library="BuiltIn">
-<doc>Pauses the test executed for the given time.</doc>
-<arguments>
-<arg>60</arg>
-</arguments>
-<msg timestamp="20181101 18:19:22.337" level="INFO">Slept 1 minute</msg>
-<status status="PASS" starttime="20181101 18:18:22.334" endtime="20181101 18:19:22.338"></status>
-</kw>
-<kw name="devops_pipeline执行结果" library="devopsAPI业务关键词">
-<arguments>
-<arg>${repo_type}</arg>
-<arg>${workspace}</arg>
-<arg>${pipeline}</arg>
-</arguments>
-<assign>
-<var>${return}</var>
-</assign>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:19:22.343" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:19:22.342" endtime="20181101 18:19:22.343"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:19:22.344" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:19:22.344" endtime="20181101 18:19:22.345"></status>
-</kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>v1/workspaces/${workspace}/pipelines/${pipeline}/records</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:19:22.697" level="INFO">Get Request using : alias=compass, uri=v1/workspaces/abcgithub/pipelines/abcgithub/records, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'} json=None</msg>
-<msg timestamp="20181101 18:19:22.698" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20181101 18:19:22.346" endtime="20181101 18:19:22.698"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20181101 18:19:22.700" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:19:22.699" endtime="20181101 18:19:22.700"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${resp.json()}</arg>
-</arguments>
-<assign>
-<var>${content}</var>
-</assign>
-<msg timestamp="20181101 18:19:22.702" level="INFO">${content} = {'metadata': {'total': 1}, 'items': [{'id': '5bdad14716da9c0001a6ca16', 'name': '285a131-181101181127', 'pipelineID': '5bdad14616da9c0001a6ca15', 'trigger': 'admin', 'performParams': {'ref': 'refs/hea...</msg>
-<status status="PASS" starttime="20181101 18:19:22.701" endtime="20181101 18:19:22.702"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${content['items'][0]['status']}</arg>
-</arguments>
-<assign>
-<var>${result}</var>
-</assign>
-<msg timestamp="20181101 18:19:22.704" level="INFO">${result} = Success</msg>
-<status status="PASS" starttime="20181101 18:19:22.703" endtime="20181101 18:19:22.705"></status>
-</kw>
-<msg timestamp="20181101 18:19:22.707" level="INFO">${return} = Success</msg>
-<status status="PASS" starttime="20181101 18:19:22.339" endtime="20181101 18:19:22.707"></status>
-</kw>
-<kw name="Run Keyword If" library="BuiltIn">
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<arguments>
-<arg>'${return}'=='Success'</arg>
-<arg>Exit For Loop</arg>
-</arguments>
-<kw name="Exit For Loop" library="BuiltIn">
-<doc>Stops executing the enclosing for loop.</doc>
-<msg timestamp="20181101 18:19:22.710" level="INFO">Exiting for loop altogether.</msg>
-<status status="PASS" starttime="20181101 18:19:22.710" endtime="20181101 18:19:22.710"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:19:22.708" endtime="20181101 18:19:22.711"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:18:22.334" endtime="20181101 18:19:22.711"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:11:20.015" endtime="20181101 18:19:22.712"></status>
-</kw>
-<msg timestamp="20181101 18:19:22.713" level="INFO">${return} = Success</msg>
-<status status="PASS" starttime="20181101 18:11:20.015" endtime="20181101 18:19:22.713"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>断言执行结果为success</arg>
-</arguments>
-<msg timestamp="20181101 18:19:22.714" level="INFO">断言执行结果为success</msg>
-<status status="PASS" starttime="20181101 18:19:22.714" endtime="20181101 18:19:22.714"></status>
-</kw>
-<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
-<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
-<arguments>
-<arg>Should Be Equal As Strings</arg>
-<arg>'${return}'</arg>
-<arg>'Success'</arg>
-</arguments>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>'${return}'</arg>
-<arg>'Success'</arg>
-</arguments>
-<status status="PASS" starttime="20181101 18:19:22.715" endtime="20181101 18:19:22.716"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:19:22.715" endtime="20181101 18:19:22.716"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>删除流水线组</arg>
-</arguments>
-<msg timestamp="20181101 18:19:22.717" level="INFO">删除流水线组</msg>
-<status status="PASS" starttime="20181101 18:19:22.716" endtime="20181101 18:19:22.717"></status>
-</kw>
-<kw name="devops_删除workspace" library="devopsAPI业务关键词">
-<arguments>
-<arg>github</arg>
-<arg>${workspaceName_github}</arg>
-</arguments>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-<arg>Authorization=Basic YWRtaW46UHdkMTIzNDU2</arg>
-<arg>X-Tenant=${namespace}</arg>
-</arguments>
-<assign>
-<var>${header}</var>
-</assign>
-<msg timestamp="20181101 18:19:22.718" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}</msg>
-<status status="PASS" starttime="20181101 18:19:22.718" endtime="20181101 18:19:22.718"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>compass</arg>
-<arg>http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io</arg>
-<arg>${header}</arg>
-</arguments>
-<msg timestamp="20181101 18:19:22.719" level="INFO">Creating Session using : alias=compass, url=http://192.168.129.30:6002/apis/admin.devops.caicloud.io, headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20181101 18:19:22.719" endtime="20181101 18:19:22.720"></status>
-</kw>
-<kw name="Delete Request" library="RequestsLibrary">
-<doc>Send a DELETE request on the session object found using the</doc>
-<arguments>
-<arg>compass</arg>
-<arg>/v1/workspaces/${workspace}</arg>
-<arg>headers=${header}</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20181101 18:19:23.329" level="INFO">Delete Request using : alias=compass, uri=/v1/workspaces/abcgithub, data=[],                     headers={'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46UHdkMTIzNDU2', 'X-Tenant': 'godevops'}, allow_redirects=True </msg>
-<msg timestamp="20181101 18:19:23.330" level="INFO">${resp} = &lt;Response [204]&gt;</msg>
-<status status="PASS" starttime="20181101 18:19:22.720" endtime="20181101 18:19:23.330"></status>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<arguments>
-<arg>${resp.status_code}</arg>
-<arg>204</arg>
-</arguments>
-<msg timestamp="20181101 18:19:23.332" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" starttime="20181101 18:19:23.331" endtime="20181101 18:19:23.333"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:19:22.717" endtime="20181101 18:19:23.333"></status>
-</kw>
-<status status="PASS" starttime="20181101 18:11:16.530" endtime="20181101 18:19:23.334" critical="yes"></status>
-</test>
-<status status="PASS" starttime="20181101 18:09:13.564" endtime="20181101 18:19:23.336"></status>
+<status status="PASS" starttime="20181102 14:53:33.842" endtime="20181102 14:55:37.920"></status>
 </suite>
-<status status="PASS" starttime="20181101 18:09:13.561" endtime="20181101 18:19:23.344"></status>
+<status status="PASS" starttime="20181102 14:53:33.840" endtime="20181102 14:55:37.927"></status>
 </suite>
-<status status="PASS" starttime="20181101 18:09:13.558" endtime="20181101 18:19:23.348"></status>
+<status status="PASS" starttime="20181102 14:53:33.837" endtime="20181102 14:55:37.930"></status>
 </suite>
-<status status="PASS" starttime="20181101 18:09:13.531" endtime="20181101 18:19:23.351"></status>
+<status status="PASS" starttime="20181102 14:53:33.808" endtime="20181102 14:55:37.932"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="2" fail="0">Critical Tests</stat>
-<stat pass="2" fail="0">All Tests</stat>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="2" fail="0" id="s1" name="Devops">Devops</stat>
-<stat pass="2" fail="0" id="s1-s1" name="测试用例">Devops.测试用例</stat>
-<stat pass="2" fail="0" id="s1-s1-s1" name="API">Devops.测试用例.API</stat>
-<stat pass="2" fail="0" id="s1-s1-s1-s1" name="API">Devops.测试用例.API.API</stat>
+<stat pass="1" fail="0" id="s1" name="Devops">Devops</stat>
+<stat pass="1" fail="0" id="s1-s1" name="测试用例">Devops.测试用例</stat>
+<stat pass="1" fail="0" id="s1-s1-s1" name="API">Devops.测试用例.API</stat>
+<stat pass="1" fail="0" id="s1-s1-s1-s1" name="API">Devops.测试用例.API.API</stat>
 </suite>
 </statistics>
 <errors>
