@@ -1,5 +1,5 @@
 FROM cargo-regression-a.caicloudprivatetest.com/library/python:3.6.5-alpine3.6
-ADD compass/devops/requirements.txt /app
+ADD compass/devops/requirements.txt /app/
 RUN apk update && \
     apk add --no-cache openssh-server tzdata python && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
