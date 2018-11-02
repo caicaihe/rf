@@ -6,12 +6,12 @@ Library    Collections
 *** Test Cases ***    
 good
     ${kk}    Evaluate    base64.b64decode('${github_token}')    modules=base64
-    log    ${kk}
-    ${content}    Evaluate    ${workspaceJSON_github}
+   # log    ${kk}
+    #${content}    Evaluate    ${workspaceJSON_github}
    
-    log     ${content['scm']['token']}
-    Set To Dictionary    ${content['scm']}      token=${kk}
-    log     ${content['scm']['token']}
+    #log     ${content['scm']['token']}
+    Set To Dictionary    ${workspaceJSON_github['scm']}      token=${kk}
+    log     ${workspaceJSON_github['scm']}  
     
  ppp
      ${aa}    Set Variable    ddd
