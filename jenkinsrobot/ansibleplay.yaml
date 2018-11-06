@@ -10,7 +10,7 @@
 - hosts: rfrun
   tasks:
   - name: copy test case
-    copy: src=compass/devops dest=/app
+    copy: src=../compass/devops dest=/app
   - name: create result directory
     file: path=/app/result state=directory
   - name: exec-dcetest
