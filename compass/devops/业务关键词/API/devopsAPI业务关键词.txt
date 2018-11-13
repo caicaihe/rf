@@ -24,6 +24,7 @@ devops_创建workspace
     ${githubjson_token}    github流水线获取token    
    ${workspaceJson}     Run Keyword If    '${repo_type}'=='gitlab'   Set Variable    ${workspaceJson_gitlab}
    ...       ELSE IF     '${repo_type}'=='github'   Set Variable      ${githubjson_token}
+   ...       ELSE IF     '${repo_type}'=='svn'   Set Variable      ${workspaceJSON_svn}
    log    ${workspaceJson} 
     ${header}    Create Dictionary   Content-Type=application/json  Authorization=Basic YWRtaW46UHdkMTIzNDU2   X-Tenant=${namespace}      
     Create Session    compass  http://${compass_ip}:${api_port}/apis/admin.devops.caicloud.io    ${header} 

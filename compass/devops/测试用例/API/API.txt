@@ -32,4 +32,17 @@ devops_持续交付_github_maven流水线
     log    删除流水线组
     devops_删除workspace   github   ${workspaceName_github}   
     
-    
+devops_持续交付_svn_maven流水线
+    log    devops_创建workspace
+    devops_创建workspace    svn    ${workspaceName_svn}  
+     log     devops_创建pipeline
+     devops_创建pipeline   svn   golang   ${workspaceName_svn}       ${pipelineName_svn}
+      log    devops_执行pipeline
+    devops_执行pipeline    svn   ${workspaceName_svn}     ${pipelineName_svn}
+    log    devops_pipeline执行结果
+    ${return}    devops_pipeline执行结果_流水线执行完毕   svn   ${workspaceName_svn}     ${pipelineName_svn} 
+    log    断言执行结果为success
+    Run Keyword And Continue On Failure    Should Be Equal As Strings    '${return}'    'Success'     
+    log    删除流水线组
+    devops_删除workspace   svn   ${workspaceName_svn}   
+   
