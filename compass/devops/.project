@@ -14,4 +14,16 @@
 	<natures>
 		<nature>org.robotframework.ide.eclipse.main.plugin.robotNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>libspecs/args_7bbed163.arg</name>
+			<type>1</type>
+			<location>/var/folders/1d/w7rtgx4n3ng8t6ftd6pw0n6h0000gp/T/RobotTempDir8001065436770115322/args_7bbed163.arg</location>
+		</link>
+		<link>
+			<name>libspecs/args_928ada54.arg</name>
+			<type>1</type>
+			<location>/var/folders/1d/w7rtgx4n3ng8t6ftd6pw0n6h0000gp/T/RobotTempDir8001065436770115322/args_928ada54.arg</location>
+		</link>
+	</linkedResources>
 </projectDescription>

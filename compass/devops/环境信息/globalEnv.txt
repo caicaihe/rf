@@ -1,10 +1,10 @@
 *** Variables ***
-${compass_ip}         192.168.129.30    # 本地地址
+${compass_ip}         192.168.129.40    # 本地地址
 ${api_port}       6002    # 端口号
 ${web_port}       6060
 ${web_login_port}       6060
 ${username}    admin
-${namespace}   godevops
+${namespace}   devops
 ${workspaceName_github}   abcgithub
 ${pipelineName_github}    abcgithub
 ${workspaceName_gitlab}   abcgitlab
@@ -12,4 +12,4 @@ ${pipelineName_gitlab}    abcgitlab
 ${workspaceName_svn}   abcsvn
 ${pipelineName_svn}    abcsvn
 ${password}    Pwd123456
-${github_token}    Yzk2YzA2YTExZWU2YjA0OWFlNGU3OGI4MTI3ZDUwMmIxMWI0ZTc2Ng==
+${github_token}    NzYwN2NjNjY3MmQ3N2ZjYTk5MDE0ZWY5ODdkMGFiMGU0NTY0YjQwYg==
