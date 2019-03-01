@@ -1,6 +1,6 @@
 *** Settings ***
-Resource    ../../业务关键词/API/devopsAPI业务关键词.txt
-Resource          ../../环境信息/globalEnv.txt
+Resource    ../../keywordService/API/devopsAPI业务关键词.txt
+Resource          ../../envInfo/globalEnv.txt
 
 *** Test Cases ***    
 devops_持续交付_gitlab_golang流水线

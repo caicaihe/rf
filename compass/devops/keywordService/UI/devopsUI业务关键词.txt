@@ -1,5 +1,5 @@
 *** Settings ***
-Resource          ../../环境信息/globalEnv.txt
+Resource          ../../envInfo/globalEnv.txt
 
 Library    Selenium2Library
 
