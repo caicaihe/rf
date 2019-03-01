@@ -1,6 +1,6 @@
 *** Settings ***
 Resource          ../../环境信息/globalEnv.txt
-Resource          ../../测试数据/API/APIData.txt
+Resource          ../../testData/API/devopsAPIData/devopsAPIData.txt
 Library    Collections 
 Library    OperatingSystem 
 Library    String

@@ -7,7 +7,7 @@ Library    Selenium2Library
 
 *** Keywords ***
 登录
-    Open Browser    http://${compass_ip}:${web_login_port}   
+    Open Browser    http://${compass_ip}:${web_login_port}       browser=firefox  remote_url=http://192.168.133.29:4444/wd/hub
     Input Text    css=input[type=\"text\"]    admin
     Input Text    css=input[type=\"password\"]    Pwd123456
     Click element    xpath=/html/body/main/div/div[1]/div[2]/div[2]/form/button     

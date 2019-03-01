@@ -1,15 +1,27 @@
 *** Variables ***
-${compass_ip}         192.168.129.40    # 本地地址
+#global
+${compass_ip}         192.168.129.130    # 本地地址
 ${api_port}       6002    # 端口号
 ${web_port}       6060
 ${web_login_port}       6060
 ${username}    admin
 ${namespace}   devops
-${workspaceName_github}   abcgithub
-${pipelineName_github}    abcgithub
-${workspaceName_gitlab}   abcgitlab
-${pipelineName_gitlab}    abcgitlab
-${workspaceName_svn}   abcsvn
-${pipelineName_svn}    abcsvn
+${gitlabaddress}     192.168.130.29:81
+${gitlab_token}     Hr9qf-Uzx_Rj62movs_x
+
+#devops
+${workspaceName_github}   autoagithub
+${pipelineName_github}    autoagithub
+${workspaceName_gitlab}   autoabcgitlab
+${pipelineName_gitlab}    autoabcgitlab
+${workspaceName_svn}   autoabcsvn
+${pipelineName_svn}    autoabcsvn
 ${password}    Pwd123456
+${registry_url}    test.caicloudprivatetest.com
 ${github_token}    NzYwN2NjNjY3MmQ3N2ZjYTk5MDE0ZWY5ODdkMGFiMGU0NTY0YjQwYg==
+
+
+#registry
+${registryName}    default
+${projectName}    autotestabc
+${testImageName}    autotestddd

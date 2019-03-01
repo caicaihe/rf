@@ -1,10 +1,12 @@
 *** Settings ***
 Resource    ../../业务关键词/UI/devopsUI业务关键词.txt
 Resource          ../../环境信息/globalEnv.txt
+Library    Selenium2Library    
 
 *** Test Cases ***
 login
-    登录
+    登录 
+    Execute Javascript    localStorage.setItem('initOverview', true)
     Sleep    5    
     进入用户    ${namespace}
     Sleep    5

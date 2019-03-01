@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <projectConfiguration>
     <configVersion>2</configVersion>
-    <robotExecEnvironment path="/usr/local/Cellar/python/3.7.1/bin" interpreter="Python3"/>
+    <robotExecEnvironment path="/usr/local/Cellar/python/3.7.2/bin" interpreter="Python3"/>
     <relativeTo>WORKSPACE</relativeTo>
     <referencedLibrary type="PYTHON" name="RequestsLibrary" path="/usr/local/lib/python3.7/site-packages"/>
     <referencedLibrary type="PYTHON" name="Selenium2Library" path="/usr/local/lib/python3.7/site-packages"/>

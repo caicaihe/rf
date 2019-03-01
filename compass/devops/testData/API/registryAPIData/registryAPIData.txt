@@ -1,0 +1,6 @@
+*** Settings ***
+Resource          ../../../环境信息/globalEnv.txt
+
+
+*** Variables ***
+${poject_createJSON}    {"metadata":{"name":"${projectName}"},"spec":{"description":"This is devops private project"}}
