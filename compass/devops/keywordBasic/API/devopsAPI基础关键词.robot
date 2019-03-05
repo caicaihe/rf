@@ -1,6 +1,6 @@
 *** Settings ***
-Resource          ../../envInfo/globalEnv.txt
-Resource          ../../testData/API/devopsAPIData/devopsAPIData.txt
+Resource          ../../envInfo/globalEnv.robot
+Resource          ../../testData/API/devopsAPIData/devopsAPIData.robot
 Library    Collections 
 Library    OperatingSystem 
 Library    String

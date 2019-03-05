@@ -1,5 +1,5 @@
 *** Settings ***
-Resource          ../../../envInfo/globalEnv.txt
+Resource          ../../../envInfo/globalEnv.robot
 
 
 *** Variables ***

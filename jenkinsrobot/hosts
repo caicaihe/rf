@@ -1,2 +1,2 @@
 [rfrun]
-192.168.132.1  ansible_ssh_user=root  ansible_ssh_pass=admin   ansible_ssh_port=30787
+192.168.133.29  ansible_ssh_user=root  ansible_ssh_pass=caicloud2019   ansible_ssh_port=22

@@ -1,7 +1,7 @@
 *** Settings ***
 Resource          ../../envInfo/globalEnv.txt
-Resource          ../../testData/API/devopsAPIData/devopsAPIData.txt
-Resource          ../../keywordBasic/API/devopsAPI基础关键词.txt
+Resource          ../../testData/API/devopsAPIData/devopsAPIData.robot
+Resource          ../../keywordBasic/API/devopsAPI基础关键词.robot
 Library    Collections 
 Library    OperatingSystem 
 Library    RequestsLibrary
